@@ -1,0 +1,95 @@
+---
+title: "script"
+format: html
+---
+
+## Slide 1
+
+Hi everyone, I will be giving a presentation on the topic of visual explanations from explainers. This research is supervised by Dianne Cook, Patricia Menendez, Kate Saunders, Thiyanga Talagala.
+
+## Slide 2
+
+"To understand why we need Explainable AI, or XAI, we have to look at how machine learning has evolved. We have seen a massive shift toward these methods in high-stakes fields like genome sequencing, climate modeling, and natural language tasks.
+
+Why? Because modern algorithms are non-parametric. This means they map incredibly complex connections between input variables with minimal human intervention. They don’t rely on our prior assumptions; they learn implicitly. However, because these connections are learned implicitly rather than explicitly designed by a programmer, the final model behaves like a complete 'black box.' As these models are deployed in public-facing scenarios—affecting hiring, healthcare, and finance—understanding their inner workings is no longer just a luxury; it is of paramount importance."
+
+## Slide 3
+
+"In response to this opacity, the field of Explainable Artificial Intelligence emerged. The central aim of XAI is to provide mathematical and algorithmic tools that gather insights into how these black-box models—particularly deep learning architectures—make their decisions.
+
+Ultimately, XAI is about shifting control back to the user and the practitioner. By creating post-hoc explanations, we address foundational concerns related to trust, transparency, and accountability in AI systems. If we cannot explain *why* a model made a specific prediction, we cannot responsibly rely on it."
+
+## Slide 4
+
+"As the field grew, researchers began categorizing XAI techniques based on their scope and robustness. When we look at scope, the landscape splits into two main branches: Local methods and Global methods.
+
+Local methods narrow their focus down to a single, specific observation. They answer the question: *Why did the model reject this specific loan application?* Common examples include SHAP, Anchors, and Counterfactual explanations.
+
+Global methods, on the other hand, look at the entire dataset. They aggregate local insights to show the big picture—how a predictor variable affects the model's output across all observations. Examples include Partial Dependency Plots and Accumulated Local Effect plots."
+
+## Slide 5
+
+"We also categorize XAI methods by their architectural dependency.
+
+On one side, we have **Model-Specific** methods. These rely on the unique engineering of a certain model type. For instance, deep learning models give us access to internal gradients, allowing us to build saliency maps or feature visualizations.
+
+On the other side, we have **Model-Agnostic** methods. These treat the machine learning model strictly as a mathematical function of input data vs. output predictions. They don't care if the underlying model is a random forest, a neural network, or a support vector machine. Because they are robust to a wide range of architectures, model-agnostic methods are incredibly versatile and widely adopted in modern workflows."
+
+## Slide 6 
+
+"Despite the incredible mathematical breakthroughs in XAI, current state-of-the-art visualization tools suffer from what we call the *Isolation Problem*.
+
+Popular packages focus almost exclusively on rendering isolated, numerical feature contributions. They show you a bar chart or a spreadsheet of numbers indicating feature importance. What they *fail* to do is communicate how these explanations relate to the data itself or the model's actual internal view of the data. Practitioners are left navigating a fragmented, disjointed ecosystem without a unified framework to guide them."
+
+## Slide 7
+
+"This isolation creates a massive practical headache: Algorithmic Disagreements.
+
+Because different XAI methods probe different mathematical facets of a model, they inherently capture different aspects of the decision boundary. Consequently, when you apply multiple XAI methods to the exact same pipeline, they frequently yield completely conflicting explanations.
+
+Right now, resolving these disagreements forces practitioners to manually reconcile abstract mathematical formulas with raw numerical outputs. It is inefficient, confusing, and introduces human bias into the validation process."
+
+## Slide 8
+
+"To bridge this gap, this paper introduces a novel framework of **geometric representations for XAI methods**.
+
+Instead of looking at abstract numbers in isolation, our core innovation is to map these explanations to a *shared geometric space*. By doing this, we visually unify three critical elements: the raw data points, the model's internal representations, and the resulting feature attributions.
+
+By turning mathematical disagreements into geometric relationships, we give practitioners an intuitive, visual method to see *why* algorithms disagree and how to resolve them directly in the feature space."
+
+## Slide 9
+
+"To ground this geometric framework, let’s first look at the baseline predictive workflow we are all familiar with.
+
+As shown in this diagram, the standard goal is optimization for prediction. We take a dataset, split it into training and testing partitions, train the model, and score it against the held-out test data. This loop is highly effective for maximizing predictive accuracy, but it completely leaves out the architecture required for generating local explanations."
+
+## Slide 10
+
+"If we want to understand the prediction space geometrically, our framework highlights four primary components that must be visually inspected together:
+
+First, the True Decision Boundary—which serves as our ground-truth baseline in simulations.
+Second, the Training Dataset, showing the data distribution the model actually learned from.
+Third, the Testing Dataset, allowing us to see how the model behaves on unseen data.
+And fourth, the Learned Decision Surface, which is generated by mapping predictions over a dense, simulated grid of all possible feature values. Seeing these together is the first step toward visual transparency."
+
+## Slide 11
+
+"When we shift our focus from global prediction to local explanation, our primary question changes. We are now asking: *'Which features were most influential in giving the current prediction for this specific observation?'*
+
+Because modern machine learning models exhibit highly non-linear decision boundaries—especially around difficult classification regions—global summaries fail. We must look locally. By restricting our focus to local, model-agnostic methods, we ensure that our geometric framework remains applicable regardless of the underlying model, preventing it from becoming obsolete as newer machine learning architectures emerge."
+
+## Slide 12
+
+"Even though local XAI algorithms look completely different on the surface, our framework abstracts them into three common building blocks:
+
+1. **The Perturbation Mechanism:** Synthetic observations are generated in the immediate neighborhood of our target point to test local sensitivity.
+2. **The Optimization Objective:** The black-box model evaluates these perturbed points, and an explanation is optimized using method-specific criteria like surrogate loss or Shapley axioms.
+3. **The Final Output:** The optimized representation is returned as an interpretable format, like coefficients or rules."
+
+## Slide 13 
+
+"To wrap up, the biggest hurdle in machine learning is that these models rely on procedural algorithms rather than an explicit functional form.
+
+To overcome this, many XAI methods train a simple, interpretable proxy model—a *Local Parametric Model*—over the perturbed dataset. Whether it is a Generalized Linear Model, a ridge regression, or a shallow decision tree, these proxies give us a clear, local approximation of the complex black box.
+
+By mapping these local parametric approximations into a shared geometric space, we can finally visualize, compare, and trust our AI workflows. Thank you, and I will now take any questions."

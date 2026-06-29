@@ -1,0 +1,47 @@
+/*-- scss:defaults --*/
+/* Font families */
+@import url(https://fonts.bunny.net/css?family=noto-sans:400,400i,800,800i);
+
+$base-font: "Noto Sans", sans-serif;
+$orange: #ff9400;
+$blue: #009cff;
+$black: #2d2316;
+$white: #d7e5ee;
+
+$body-bg: $white;
+$body-font-color: $black;
+$font-family-sans-serif: $base-font;
+$presentation-heading-font: $base-font;
+$presentation-heading-color: $black;
+
+.slide-menu-button {
+  display: none;
+}
+
+.footer {
+  font-size: 0.9rem;
+  color: $blue !important;
+}
+
+.reveal .progress {
+  color: lighten($orange, 70%) !important;
+  height: 7px;
+}
+
+.reveal .slide-number {
+  color: $orange !important;
+}
+
+.reveal .slide-logo {
+  max-height: 4.2rem !important;
+}
+
+.center {
+  text-align: center;
+}
+
+.reveal blockquote {
+  color: $orange !important;
+}
+
+/*-- scss:rules --*/

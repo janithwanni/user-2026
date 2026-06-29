@@ -1,0 +1,148 @@
+---
+title: "Visual Explanations of XAI Explainers"
+author: "Janith Wanniarachchi"
+subtitle: "Supervised by Dianne Cook, Patricia Menendez, Thiyanga Talagala and Kate Saunders"
+format:
+  revealjs:
+    footer: "janithwanni.com/talks/user-2026"
+    theme: [default, user_theme.scss]
+    slide-number: true
+    smaller: true
+    history: false 
+    embed-resources: true
+    mermaid:
+      theme: neutral
+---
+
+## Hi I'm Janith
+
+* I'm a PhD candidate at Monash University, Australia 
+* My research work is around making it easier to explain how machine learning models work.
+
+## AI and Machine Learning is everywhere
+
+* Like it or not, there's a surge of models created to solve problems across domains.
+* It feels easy to create these models with easy to access compute power and less restrictions on mapping the inputs and outputs
+* But when these models are facing the public, and we can't understand how they work, that's going to be a problem!
+* And that is where Explainable AI (XAI) methods come in.
+
+## XAI has a lot of facets
+
+XAI can help you look at 
+
+:::: {.columns}
+
+::: {.column width=50%}
+
+<p style = "text-align:center"> <img src="imgs/global_methods_2.png" style="width:90%"/> </p>
+
+How the model reacts to different features overall using <span class="accent-color"> Global Interpretability Methods </span>
+
+:::
+
+::: {.column width=50%}
+
+<p style = "text-align:center"> <img src="imgs/local_methods_2.png" style="width:90%"/> </p>
+
+How the model gives a prediction to one single instance using <span class="accent-color">Local Interpretability Methods </span>
+
+::: 
+
+::::
+
+## Explaining one prediction
+
+There are several key <span class = "accent-color"> local interpretability methods </span> that are related to each other in how they approach the problem
+
+1. LIME (Local Interpretable Model agnostic Explanations)
+2. SHAP (SHapley Additive exPlanations)
+2. Anchors
+3. Counterfactuals
+
+
+## The Isolation Problem
+
+Despite XAI advances, current state-of-the-art tools operate in a vacuum.
+
+* Visualizations focus heavily on rendering isolated numerical feature contributions.
+* They fail to communicate how explanations relate to the data itself or the model's actual internal view of that data.
+
+Practitioners are left navigating a fragmented, disconnected ecosystem.
+
+---
+
+## Algorithmic Disagreements
+
+Why do current workflows fail?
+
+* Different XAI methods probe different mathematical facets of a model.
+* When you run multiple methods on the same pipeline, they **frequently yield conflicting explanations**.
+
+Practitioners must manually reconcile abstract mathematical formulas with raw numerical outputs.
+
+## The Baseline Predictive Workflow
+
+Before explaining, we must map standard predictive model design.
+
+```{mermaid}
+%%| fig-width: 9
+flowchart LR
+    subgraph Prediction Workflow
+    direction LR
+      A["Dataset"] --> B["Training Data"]
+      A --> C["Testing Data"]
+      
+      B --> D["Train Model"]
+      D --> E["Trained Model"]
+      
+      C --> F["Scoring & Evaluation"]
+      E --> F
+    end
+
+```
+
+## Setting the Stage for Local Explanations
+
+When shifting from *prediction* to *explanation*, the core question changes:
+
+> "Which features were most influential in giving the current prediction for this specific observation?"
+
+* Highly non-linear boundaries require **local** analysis.
+* **Model-agnostic** choices ensure the framework survives even as old models become obsolete.
+
+## The 3-Stage Explanatory Abstraction
+
+All local, model-agnostic XAI tools can be simplified into three common blocks:
+
+::: {.incremental}
+
+1. **Perturbation Mechanism**
+* Generates synthetic observations in the neighborhood of the target observation (e.g., masking, local sampling).
+
+
+2. **Optimization Objective**
+* Evaluates black-box mappings against a criterion (surrogate loss, axioms, distance metrics).
+
+
+3. **Final Output**
+* Returns an interpretable form (coefficients, rules, counterfactuals).
+:::
+
+# Visualising XAI methods
+
+## SHAP
+
+## LIME
+
+## Counterfactuals
+
+## Anchors
+
+## In conclusion,
+
+> My key take-away message is: Visualsing XAI methods requires us to look at all parts of the pipeline.
+>
+> We hope you that you get to use our proposed ideas and packages in the future when you are trying to explain models.
+
+
+

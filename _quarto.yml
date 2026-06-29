@@ -1,0 +1,6 @@
+project:
+  type: default
+  preview:
+    port: 7887
+    browser: false
+
