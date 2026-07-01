@@ -121,10 +121,6 @@
       margin-right: 0; 
     }
   </style>
-  <meta name="mermaid-theme" content="neutral">
-  <script src="index_files/libs/quarto-diagram/mermaid.min.js"></script>
-  <script src="index_files/libs/quarto-diagram/mermaid-init.js"></script>
-  <link href="index_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -252,94 +248,121 @@ Janith Wanniarachchi
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.1/backbone-min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.7.7/joint.min.js"></script>
-
-<div style="display: flex; justify-content: center; width: 100%; margin-top: 20px;">
-    <div id="xai-workflow-canvas" style="background: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"></div>
+<div style="display: flex; justify-content: center; width: 100%; margin-top: 10px;">
+<pre><code>&lt;div id="xai-workflow-canvas-lr" style="background: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"&gt;&lt;/div&gt;</code></pre>
 </div>
-
 <script>
 $(document).ready(function() {
     var namespace = joint.shapes;
     var graph = new joint.dia.Graph({}, { cellNamespace: namespace });
 
     var paper = new joint.dia.Paper({
-        el: document.getElementById('xai-workflow-canvas'),
+        el: document.getElementById('xai-workflow-canvas-lr'),
         model: graph,
-        width: 800,
-        height: 650,
+        width: 1040,
+        height: 320,
         gridSize: 10,
         drawGrid: false,
         background: { color: 'transparent' },
         cellNamespace: namespace,
-        interactive: true // Set to true if you want to drag elements during the presentation
+        interactive: true
+    });
+
+    // 1. Define Inline SVG Icons (Feather Icons)
+    // Note: Use %23 instead of # for hex colors in SVG strings
+    const svgBox = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%230d6efd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>`;
+    const svgTarget = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%230d6efd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>`;
+    const svgNetwork = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%230d6efd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>`;
+    const svgSettings = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%230d6efd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>`;
+    const svgSliders = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%230d6efd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>`;
+    const svgBulb = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23198754" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="M4.93 4.93l1.41 1.41"></path><path d="M17.66 17.66l1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="M6.34 17.66l-1.41 1.41"></path><path d="M19.07 4.93l-1.41 1.41"></path><path d="M9 22h6"></path><path d="M10 18h4"></path><path d="M15 12a3 3 0 0 1-6 0 5 5 0 0 1 10 0v1a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-1"></path></svg>`;
+
+    // 2. Define Custom Element (Node with an Icon)
+    var IconNode = joint.dia.Element.define('IconNode', {
+        attrs: {
+            body: {
+                refWidth: '100%', refHeight: '100%',
+                fill: '#ffffff', stroke: '#0d6efd', strokeWidth: 2, rx: 6, ry: 6
+            },
+            icon: {
+                width: 24, height: 24,
+                refX: 12, refY: '50%', refY2: -12
+            },
+            label: {
+                refX: 46, refY: '50%', textAnchor: 'start', textVerticalAnchor: 'middle',
+                fill: '#212529', fontSize: 13, fontWeight: 'bold',
+                textWrap: { width: 140, height: 50 }
+            }
+        }
+    }, {
+        markup: [
+            { tagName: 'rect', selector: 'body' },
+            { tagName: 'image', selector: 'icon' },
+            { tagName: 'text', selector: 'label' }
+        ]
     });
 
     // Helper: Create Subgraph Backgrounds
     function createSubgraph(id, label, x, y, width, height) {
         return new joint.shapes.standard.Rectangle({
-            id: id,
-            position: { x: x, y: y },
-            size: { width: width, height: height },
+            id: id, position: { x: x, y: y }, size: { width: width, height: height },
             attrs: {
                 body: { fill: '#f8f9fa', stroke: '#adb5bd', strokeWidth: 2, strokeDasharray: '5,5', rx: 10, ry: 10 },
-                label: { text: label, fill: '#6c757d', fontSize: 14, fontWeight: 'bold', refY: 15, textAnchor: 'middle' }
+                label: { text: label, fill: '#6c757d', fontSize: 13, fontWeight: 'bold', refY: 15, textAnchor: 'middle' }
             }
         });
     }
 
-    // Helper: Create Nodes
-    function createNode(id, label, x, y) {
-        return new joint.shapes.standard.Rectangle({
-            id: id,
-            position: { x: x, y: y },
-            size: { width: 240, height: 60 },
+    // Helper: Create Nodes with Data URIs
+    function createNode(id, label, x, y, svgStr, colorClass) {
+        var strokeColor = colorClass === 'success' ? '#198754' : '#0d6efd';
+        return new IconNode({
+            id: id, position: { x: x, y: y }, size: { width: 190, height: 60 },
             attrs: {
-                body: { fill: '#ffffff', stroke: '#0d6efd', strokeWidth: 2, rx: 5, ry: 5 },
-                label: { text: label, fill: '#212529', fontSize: 14, textWrap: { width: 220, height: 50 } }
+                body: { stroke: strokeColor },
+                icon: { 'xlink:href': 'data:image/svg+xml;utf8,' + svgStr }
             }
-        });
+        }).attr('label/text', label);
     }
 
-    // Helper: Create Links
-    function createLink(sourceId, targetId) {
+    // Helper: Create Orthogonal Links
+    function createLink(sourceId, targetId, direction) {
         return new joint.shapes.standard.Link({
-            source: { id: sourceId },
-            target: { id: targetId },
-            router: { name: 'manhattan' }, // Creates orthogonal lines
+            source: { id: sourceId }, target: { id: targetId },
+            router: { name: 'manhattan', args: { startDirections: ['right'], endDirections: ['left', 'top', 'bottom'] } },
             connector: { name: 'rounded' },
-            attrs: {
-                line: { stroke: '#495057', strokeWidth: 2, targetMarker: { 'type': 'path', 'd': 'M 10 -5 0 0 10 5 Z' } }
-            }
+            attrs: { line: { stroke: '#495057', strokeWidth: 2, targetMarker: { 'type': 'path', 'd': 'M 10 -5 0 0 10 5 Z' } } }
         });
     }
 
-    // 1. Define Subgraphs (Containers)
-    var subInput = createSubgraph('subInput', 'Input Space', 40, 20, 720, 120);
-    var subStep1 = createSubgraph('subStep1', '1. Perturbation Mechanism', 40, 170, 720, 120);
-    var subStep2 = createSubgraph('subStep2', '2. Optimization Objective', 240, 320, 320, 120);
-    var subStep3 = createSubgraph('subStep3', '3. Final Output', 240, 470, 320, 120);
+    // 3. Define Subgraphs (Left to Right flow)
+    var subInput = createSubgraph('subInput', 'Input Space', 20, 20, 230, 280);
+    var subStep1 = createSubgraph('subStep1', '1. Perturbation Mechanism', 270, 20, 230, 280);
+    var subStep2 = createSubgraph('subStep2', '2. Optimization Objective', 520, 20, 230, 280);
+    var subStep3 = createSubgraph('subStep3', '3. Final Output', 770, 20, 230, 280);
 
-    // 2. Define Nodes
-    var nodeA = createNode('A', 'Trained Black-Box Model', 80, 60);
-    var nodeB = createNode('B', 'Local Observation (x)', 480, 60);
-    var nodeD = createNode('D', 'Compute Black-Box Mapping', 80, 210);
-    var nodeC = createNode('C', 'Generate Local Neighbors', 480, 210);
-    var nodeE = createNode('E', 'Apply Optimization Criteria', 280, 360);
-    var nodeF = createNode('F', 'XAI Explanation', 280, 510);
+    // 4. Define Nodes
+    var nodeA = createNode('A', 'Trained Black-Box Model', 40, 70, svgBox);
+    var nodeB = createNode('B', 'Local Observation (x)', 40, 190, svgTarget);
+    
+    var nodeD = createNode('D', 'Compute Black-Box Mapping', 290, 70, svgSettings);
+    var nodeC = createNode('C', 'Generate Local Neighbors', 290, 190, svgNetwork);
+    
+    var nodeE = createNode('E', 'Apply Optimization Criteria', 540, 130, svgSliders);
+    var nodeF = createNode('F', 'XAI Explanation', 790, 130, svgBulb, 'success');
 
-    // 3. Embed nodes into subgraphs (Ensures they move together if interactiveness is enabled)
+    // Embed nodes into containers
     subInput.embed(nodeA); subInput.embed(nodeB);
     subStep1.embed(nodeC); subStep1.embed(nodeD);
-    subStep2.embed(nodeE);
-    subStep3.embed(nodeF);
+    subStep2.embed(nodeE); subStep3.embed(nodeF);
 
-    // Add elements to graph (Subgraphs first so they render behind nodes)
+    // Render Subgraphs and Nodes
     graph.addCells([subInput, subStep1, subStep2, subStep3, nodeA, nodeB, nodeC, nodeD, nodeE, nodeF]);
 
-    // 4. Define and add Links
+    // 5. Connect the Workflow
     var links = [
-        createLink('B', 'C'),
         createLink('A', 'D'),
+        createLink('B', 'C'),
         createLink('C', 'D'),
         createLink('C', 'E'),
         createLink('D', 'E'),
@@ -348,34 +371,6 @@ $(document).ready(function() {
     graph.addCells(links);
 });
 </script>
-</section>
-<section id="the-baseline-predictive-workflow" class="slide level2">
-<h2>The Baseline Predictive Workflow</h2>
-<p>Before explaining, we must map standard predictive model design.</p>
-<div class="cell" data-reveal="true" data-fig-width="9" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-    subgraph Prediction Workflow
-    direction LR
-      A["Dataset"] --&gt; B["Training Data"]
-      A --&gt; C["Testing Data"]
-      
-      B --&gt; D["Train Model"]
-      D --&gt; E["Trained Model"]
-      
-      C --&gt; F["Scoring &amp; Evaluation"]
-      E --&gt; F
-    end
-
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
 </section>
 <section id="setting-the-stage-for-local-explanations" class="slide level2">
 <h2>Setting the Stage for Local Explanations</h2>
