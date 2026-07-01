@@ -4,27 +4,57 @@ author: "Janith Wanniarachchi"
 subtitle: "Supervised by Dianne Cook, Patricia Menendez, Thiyanga Talagala and Kate Saunders"
 format:
   revealjs:
-    footer: "janithwanni.com/talks/user-2026"
+    footer: "user-2026.janithwanni.com"
     theme: [default, user_theme.scss]
     slide-number: true
     smaller: true
     history: false 
-    embed-resources: true
+    embed-resources: false
     mermaid:
       theme: neutral
 ---
 
+```{r}
+source("src/preamble.R")
+source("src/data.R")
+source("src/model.R")
+source("src/explainers.R")
+source("src/tables.R")
+source("src/plots.R")
+```
+
 ## Hi I'm Janith
 
+:::{.center}
 * I'm a PhD candidate at Monash University, Australia 
 * My research work is around making it easier to explain how machine learning models work.
+* 
+:::
 
 ## AI and Machine Learning is everywhere
 
+:::{.incremental}
 * Like it or not, there's a surge of models created to solve problems across domains.
 * It feels easy to create these models with easy to access compute power and less restrictions on mapping the inputs and outputs
 * But when these models are facing the public, and we can't understand how they work, that's going to be a problem!
 * And that is where Explainable AI (XAI) methods come in.
+:::
+
+## Let's take an example,
+
+You are working at the OddPoverty Bank and you were hired as a data science intern in the loan department, 
+You are given the following dataset to model, which will classify whether someone applying for a loan,
+it's a simple one for an intern with two variables,
+
+the training dataset looks like as follows,
+
+```{r}
+train_data_fig
+```
+
+## Time to get modeling,
+
+You get around 
 
 ## XAI has a lot of facets
 
@@ -67,7 +97,7 @@ Despite XAI advances, current state-of-the-art tools operate in a vacuum.
 * Visualizations focus heavily on rendering isolated numerical feature contributions.
 * They fail to communicate how explanations relate to the data itself or the model's actual internal view of that data.
 
-Practitioners are left navigating a fragmented, disconnected ecosystem.
+We are left navigating a fragmented, disconnected ecosystem.
 
 ---
 

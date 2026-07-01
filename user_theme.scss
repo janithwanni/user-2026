@@ -1,17 +1,18 @@
 /*-- scss:defaults --*/
 /* Font families */
-@import url(https://fonts.bunny.net/css?family=noto-sans:400,400i,800,800i);
+@import url(https://fonts.bunny.net/css?family=noto-sans:400,400i,800,800i|pt-sans-caption:400,700);
 
 $base-font: "Noto Sans", sans-serif;
+$heading-font: "PT Sans Caption", sans-serif;
 $orange: #ff9400;
 $blue: #009cff;
 $black: #2d2316;
 $white: #d7e5ee;
 
-$body-bg: $white;
+$body-bg: lighten($white, 20%);
 $body-font-color: $black;
 $font-family-sans-serif: $base-font;
-$presentation-heading-font: $base-font;
+$presentation-heading-font: $heading-font;
 $presentation-heading-color: $black;
 
 .slide-menu-button {
@@ -19,7 +20,6 @@ $presentation-heading-color: $black;
 }
 
 .footer {
-  font-size: 0.9rem;
   color: $blue !important;
 }
 
@@ -38,6 +38,12 @@ $presentation-heading-color: $black;
 
 .center {
   text-align: center;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
 }
 
 .reveal blockquote {
