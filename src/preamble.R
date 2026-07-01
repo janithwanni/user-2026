@@ -29,7 +29,7 @@ knitr::opts_chunk$set(
   out.width = "100%",
   code.line.numbers = FALSE,
   fig.retina = 4,
-  echo = TRUE,
+  echo = FALSE,
   message = FALSE,
   warning = FALSE,
   cache = FALSE,

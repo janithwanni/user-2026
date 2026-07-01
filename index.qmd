@@ -26,9 +26,10 @@ source("src/plots.R")
 ## Hi I'm Janith
 
 :::{.center}
+
 * I'm a PhD candidate at Monash University, Australia 
-* My research work is around making it easier to explain how machine learning models work.
-* 
+* My research work is around making it easier to explain how machine learning models work. 
+
 :::
 
 ## AI and Machine Learning is everywhere
@@ -42,9 +43,13 @@ source("src/plots.R")
 
 ## Let's take an example,
 
-You are working at the OddPoverty Bank and you were hired as a data science intern in the loan department, 
-You are given the following dataset to model, which will classify whether someone applying for a loan,
-it's a simple one for an intern with two variables,
+You are working at the OddPoverty Bank where you help wombats get loans. 
+
+and you were hired as a data science intern in the loan department,
+
+You are given the following dataset to model, which will classify whether a wombat applying for a burrow hole loan is eligible or not.
+
+it's a simple one for an intern, the dataset has two variables, how old the wombat is and how heavy the wombat is.
 
 the training dataset looks like as follows,
 
@@ -54,9 +59,25 @@ train_data_fig
 
 ## Time to get modeling,
 
-You get around 
+You get around to making a model that works well, to double check you follow a model in data space visualisation like as follows
 
-## XAI has a lot of facets
+```{r}
+model_preds_fig
+```
+
+## We have complaints! 
+
+Three wombats came up upset that their loans were rejected, and they asked what were was the important thing that we considered to deny their loan for a burrowing hole.
+
+```{r}
+poi_data_fig
+```
+
+How do we explain this model to the wombats?
+
+## We need ways to eXplain AI/ML methods   
+
+Explainable AI methods or XAI methods came in as a solution to this problem. 
 
 XAI can help you look at 
 
@@ -89,26 +110,143 @@ There are several key <span class = "accent-color"> local interpretability metho
 2. Anchors
 3. Counterfactuals
 
+## Using XAI methods 
+
+So let's pump these in to these methods and let's help our wombats out!
+
+```{r}
+disagree_table
+```
+
+Wait so which one do we tell these three wombats?
+
+## Algorithmic Disagreements
+
+Why did this workflow fail
+
+* Different XAI methods probe different mathematical facets of a model.
+* When you run multiple methods on the same pipeline, they **frequently yield conflicting explanations**.
+
+We must manually reconcile abstract mathematical formulas with raw numerical outputs.
 
 ## The Isolation Problem
 
 Despite XAI advances, current state-of-the-art tools operate in a vacuum.
 
-* Visualizations focus heavily on rendering isolated numerical feature contributions.
-* They fail to communicate how explanations relate to the data itself or the model's actual internal view of that data.
+* We don't see how these explanations relate to the data itself or the model's actual internal view of the data. 
+* There's more to the story than just the final explanations 
 
 We are left navigating a fragmented, disconnected ecosystem.
 
----
+## Let's break it apart
 
-## Algorithmic Disagreements
+XAI explanations are just the tip of the iceberg
 
-Why do current workflows fail?
+There are more things that came together to make these XAI explanations. 
 
-* Different XAI methods probe different mathematical facets of a model.
-* When you run multiple methods on the same pipeline, they **frequently yield conflicting explanations**.
+```{=html}
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.7.7/joint.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.1/backbone-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.7.7/joint.min.js"></script>
 
-Practitioners must manually reconcile abstract mathematical formulas with raw numerical outputs.
+<div style="display: flex; justify-content: center; width: 100%; margin-top: 20px;">
+    <div id="xai-workflow-canvas" style="background: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"></div>
+</div>
+
+<script>
+$(document).ready(function() {
+    var namespace = joint.shapes;
+    var graph = new joint.dia.Graph({}, { cellNamespace: namespace });
+
+    var paper = new joint.dia.Paper({
+        el: document.getElementById('xai-workflow-canvas'),
+        model: graph,
+        width: 800,
+        height: 650,
+        gridSize: 10,
+        drawGrid: false,
+        background: { color: 'transparent' },
+        cellNamespace: namespace,
+        interactive: true // Set to true if you want to drag elements during the presentation
+    });
+
+    // Helper: Create Subgraph Backgrounds
+    function createSubgraph(id, label, x, y, width, height) {
+        return new joint.shapes.standard.Rectangle({
+            id: id,
+            position: { x: x, y: y },
+            size: { width: width, height: height },
+            attrs: {
+                body: { fill: '#f8f9fa', stroke: '#adb5bd', strokeWidth: 2, strokeDasharray: '5,5', rx: 10, ry: 10 },
+                label: { text: label, fill: '#6c757d', fontSize: 14, fontWeight: 'bold', refY: 15, textAnchor: 'middle' }
+            }
+        });
+    }
+
+    // Helper: Create Nodes
+    function createNode(id, label, x, y) {
+        return new joint.shapes.standard.Rectangle({
+            id: id,
+            position: { x: x, y: y },
+            size: { width: 240, height: 60 },
+            attrs: {
+                body: { fill: '#ffffff', stroke: '#0d6efd', strokeWidth: 2, rx: 5, ry: 5 },
+                label: { text: label, fill: '#212529', fontSize: 14, textWrap: { width: 220, height: 50 } }
+            }
+        });
+    }
+
+    // Helper: Create Links
+    function createLink(sourceId, targetId) {
+        return new joint.shapes.standard.Link({
+            source: { id: sourceId },
+            target: { id: targetId },
+            router: { name: 'manhattan' }, // Creates orthogonal lines
+            connector: { name: 'rounded' },
+            attrs: {
+                line: { stroke: '#495057', strokeWidth: 2, targetMarker: { 'type': 'path', 'd': 'M 10 -5 0 0 10 5 Z' } }
+            }
+        });
+    }
+
+    // 1. Define Subgraphs (Containers)
+    var subInput = createSubgraph('subInput', 'Input Space', 40, 20, 720, 120);
+    var subStep1 = createSubgraph('subStep1', '1. Perturbation Mechanism', 40, 170, 720, 120);
+    var subStep2 = createSubgraph('subStep2', '2. Optimization Objective', 240, 320, 320, 120);
+    var subStep3 = createSubgraph('subStep3', '3. Final Output', 240, 470, 320, 120);
+
+    // 2. Define Nodes
+    var nodeA = createNode('A', 'Trained Black-Box Model', 80, 60);
+    var nodeB = createNode('B', 'Local Observation (x)', 480, 60);
+    var nodeD = createNode('D', 'Compute Black-Box Mapping', 80, 210);
+    var nodeC = createNode('C', 'Generate Local Neighbors', 480, 210);
+    var nodeE = createNode('E', 'Apply Optimization Criteria', 280, 360);
+    var nodeF = createNode('F', 'XAI Explanation', 280, 510);
+
+    // 3. Embed nodes into subgraphs (Ensures they move together if interactiveness is enabled)
+    subInput.embed(nodeA); subInput.embed(nodeB);
+    subStep1.embed(nodeC); subStep1.embed(nodeD);
+    subStep2.embed(nodeE);
+    subStep3.embed(nodeF);
+
+    // Add elements to graph (Subgraphs first so they render behind nodes)
+    graph.addCells([subInput, subStep1, subStep2, subStep3, nodeA, nodeB, nodeC, nodeD, nodeE, nodeF]);
+
+    // 4. Define and add Links
+    var links = [
+        createLink('B', 'C'),
+        createLink('A', 'D'),
+        createLink('C', 'D'),
+        createLink('C', 'E'),
+        createLink('D', 'E'),
+        createLink('E', 'F')
+    ];
+    graph.addCells(links);
+});
+</script>
+```
 
 ## The Baseline Predictive Workflow
 
