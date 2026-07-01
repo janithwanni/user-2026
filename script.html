@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>script</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="script_files/libs/clipboard/clipboard.min.js"></script>
+<script src="script_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="script_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="script_files/libs/quarto-html/popper.min.js"></script>
+<script src="script_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="script_files/libs/quarto-html/anchor.min.js"></script>
+<link href="script_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="script_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="script_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="script_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="script_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">script</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="slide-1" class="level2">
+<h2 class="anchored" data-anchor-id="slide-1">Slide 1</h2>
+<p>Hi everyone, I will be giving a presentation on the topic of visual explanations from explainers. This research is supervised by Dianne Cook, Patricia Menendez, Kate Saunders, Thiyanga Talagala.</p>
+</section>
+<section id="slide-2" class="level2">
+<h2 class="anchored" data-anchor-id="slide-2">Slide 2</h2>
+<p>“To understand why we need Explainable AI, or XAI, we have to look at how machine learning has evolved. We have seen a massive shift toward these methods in high-stakes fields like genome sequencing, climate modeling, and natural language tasks.</p>
+<p>Why? Because modern algorithms are non-parametric. This means they map incredibly complex connections between input variables with minimal human intervention. They don’t rely on our prior assumptions; they learn implicitly. However, because these connections are learned implicitly rather than explicitly designed by a programmer, the final model behaves like a complete ‘black box.’ As these models are deployed in public-facing scenarios—affecting hiring, healthcare, and finance—understanding their inner workings is no longer just a luxury; it is of paramount importance.”</p>
+</section>
+<section id="slide-3" class="level2">
+<h2 class="anchored" data-anchor-id="slide-3">Slide 3</h2>
+<p>“In response to this opacity, the field of Explainable Artificial Intelligence emerged. The central aim of XAI is to provide mathematical and algorithmic tools that gather insights into how these black-box models—particularly deep learning architectures—make their decisions.</p>
+<p>Ultimately, XAI is about shifting control back to the user and the practitioner. By creating post-hoc explanations, we address foundational concerns related to trust, transparency, and accountability in AI systems. If we cannot explain <em>why</em> a model made a specific prediction, we cannot responsibly rely on it.”</p>
+</section>
+<section id="slide-4" class="level2">
+<h2 class="anchored" data-anchor-id="slide-4">Slide 4</h2>
+<p>“As the field grew, researchers began categorizing XAI techniques based on their scope and robustness. When we look at scope, the landscape splits into two main branches: Local methods and Global methods.</p>
+<p>Local methods narrow their focus down to a single, specific observation. They answer the question: <em>Why did the model reject this specific loan application?</em> Common examples include SHAP, Anchors, and Counterfactual explanations.</p>
+<p>Global methods, on the other hand, look at the entire dataset. They aggregate local insights to show the big picture—how a predictor variable affects the model’s output across all observations. Examples include Partial Dependency Plots and Accumulated Local Effect plots.”</p>
+</section>
+<section id="slide-5" class="level2">
+<h2 class="anchored" data-anchor-id="slide-5">Slide 5</h2>
+<p>“We also categorize XAI methods by their architectural dependency.</p>
+<p>On one side, we have <strong>Model-Specific</strong> methods. These rely on the unique engineering of a certain model type. For instance, deep learning models give us access to internal gradients, allowing us to build saliency maps or feature visualizations.</p>
+<p>On the other side, we have <strong>Model-Agnostic</strong> methods. These treat the machine learning model strictly as a mathematical function of input data vs.&nbsp;output predictions. They don’t care if the underlying model is a random forest, a neural network, or a support vector machine. Because they are robust to a wide range of architectures, model-agnostic methods are incredibly versatile and widely adopted in modern workflows.”</p>
+</section>
+<section id="slide-6" class="level2">
+<h2 class="anchored" data-anchor-id="slide-6">Slide 6</h2>
+<p>“Despite the incredible mathematical breakthroughs in XAI, current state-of-the-art visualization tools suffer from what we call the <em>Isolation Problem</em>.</p>
+<p>Popular packages focus almost exclusively on rendering isolated, numerical feature contributions. They show you a bar chart or a spreadsheet of numbers indicating feature importance. What they <em>fail</em> to do is communicate how these explanations relate to the data itself or the model’s actual internal view of the data. Practitioners are left navigating a fragmented, disjointed ecosystem without a unified framework to guide them.”</p>
+</section>
+<section id="slide-7" class="level2">
+<h2 class="anchored" data-anchor-id="slide-7">Slide 7</h2>
+<p>“This isolation creates a massive practical headache: Algorithmic Disagreements.</p>
+<p>Because different XAI methods probe different mathematical facets of a model, they inherently capture different aspects of the decision boundary. Consequently, when you apply multiple XAI methods to the exact same pipeline, they frequently yield completely conflicting explanations.</p>
+<p>Right now, resolving these disagreements forces practitioners to manually reconcile abstract mathematical formulas with raw numerical outputs. It is inefficient, confusing, and introduces human bias into the validation process.”</p>
+</section>
+<section id="slide-8" class="level2">
+<h2 class="anchored" data-anchor-id="slide-8">Slide 8</h2>
+<p>“To bridge this gap, this paper introduces a novel framework of <strong>geometric representations for XAI methods</strong>.</p>
+<p>Instead of looking at abstract numbers in isolation, our core innovation is to map these explanations to a <em>shared geometric space</em>. By doing this, we visually unify three critical elements: the raw data points, the model’s internal representations, and the resulting feature attributions.</p>
+<p>By turning mathematical disagreements into geometric relationships, we give practitioners an intuitive, visual method to see <em>why</em> algorithms disagree and how to resolve them directly in the feature space.”</p>
+</section>
+<section id="slide-9" class="level2">
+<h2 class="anchored" data-anchor-id="slide-9">Slide 9</h2>
+<p>“To ground this geometric framework, let’s first look at the baseline predictive workflow we are all familiar with.</p>
+<p>As shown in this diagram, the standard goal is optimization for prediction. We take a dataset, split it into training and testing partitions, train the model, and score it against the held-out test data. This loop is highly effective for maximizing predictive accuracy, but it completely leaves out the architecture required for generating local explanations.”</p>
+</section>
+<section id="slide-10" class="level2">
+<h2 class="anchored" data-anchor-id="slide-10">Slide 10</h2>
+<p>“If we want to understand the prediction space geometrically, our framework highlights four primary components that must be visually inspected together:</p>
+<p>First, the True Decision Boundary—which serves as our ground-truth baseline in simulations. Second, the Training Dataset, showing the data distribution the model actually learned from. Third, the Testing Dataset, allowing us to see how the model behaves on unseen data. And fourth, the Learned Decision Surface, which is generated by mapping predictions over a dense, simulated grid of all possible feature values. Seeing these together is the first step toward visual transparency.”</p>
+</section>
+<section id="slide-11" class="level2">
+<h2 class="anchored" data-anchor-id="slide-11">Slide 11</h2>
+<p>“When we shift our focus from global prediction to local explanation, our primary question changes. We are now asking: <em>‘Which features were most influential in giving the current prediction for this specific observation?’</em></p>
+<p>Because modern machine learning models exhibit highly non-linear decision boundaries—especially around difficult classification regions—global summaries fail. We must look locally. By restricting our focus to local, model-agnostic methods, we ensure that our geometric framework remains applicable regardless of the underlying model, preventing it from becoming obsolete as newer machine learning architectures emerge.”</p>
+</section>
+<section id="slide-12" class="level2">
+<h2 class="anchored" data-anchor-id="slide-12">Slide 12</h2>
+<p>“Even though local XAI algorithms look completely different on the surface, our framework abstracts them into three common building blocks:</p>
+<ol type="1">
+<li><strong>The Perturbation Mechanism:</strong> Synthetic observations are generated in the immediate neighborhood of our target point to test local sensitivity.</li>
+<li><strong>The Optimization Objective:</strong> The black-box model evaluates these perturbed points, and an explanation is optimized using method-specific criteria like surrogate loss or Shapley axioms.</li>
+<li><strong>The Final Output:</strong> The optimized representation is returned as an interpretable format, like coefficients or rules.”</li>
+</ol>
+</section>
+<section id="slide-13" class="level2">
+<h2 class="anchored" data-anchor-id="slide-13">Slide 13</h2>
+<p>“To wrap up, the biggest hurdle in machine learning is that these models rely on procedural algorithms rather than an explicit functional form.</p>
+<p>To overcome this, many XAI methods train a simple, interpretable proxy model—a <em>Local Parametric Model</em>—over the perturbed dataset. Whether it is a Generalized Linear Model, a ridge regression, or a shallow decision tree, these proxies give us a clear, local approximation of the complex black box.</p>
+<p>By mapping these local parametric approximations into a shared geometric space, we can finally visualize, compare, and trust our AI workflows. Thank you, and I will now take any questions.”</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
