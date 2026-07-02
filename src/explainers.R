@@ -6,7 +6,7 @@ if (CLEAN_RUN) {
     data = two_dim_data,
     pois = data_space_poi,
     predictor_vars = c("x", "y"),
-    class_names = c("A", "B")
+    class_names = c("Accept", "Reject")
   )
   saveRDS(twod_ks, kquat_loc)
 } else {
@@ -58,7 +58,7 @@ if (CLEAN_RUN) {
 
   cfvals <- map(seq_len(nrow(poi_data)), function(i) {
     obs <- poi_data[i, ]
-    new_class <- ifelse(obs$class == "A", "B", "A")
+    new_class <- ifelse(obs$class == "Accept", "Reject", "Accept")
     w_cf <- cf_gen$find_counterfactuals(
       x_interest = obs,
       desired_class = new_class,

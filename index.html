@@ -306,35 +306,35 @@ Janith Wanniarachchi
 <thead>
 <tr class="header">
 <th style="text-align: right;">wombat</th>
-<th style="text-align: left;">Counterfactuals</th>
 <th style="text-align: left;">lime</th>
 <th style="text-align: left;">SHAP</th>
+<th style="text-align: left;">Counterfactuals</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">20211</td>
+<td style="text-align: left;">x,y</td>
 <td style="text-align: left;">cuteness</td>
-<td style="text-align: left;">chonky</td>
-<td style="text-align: left;">chonky</td>
+<td style="text-align: left;">cuteness</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">27678</td>
-<td style="text-align: left;">chonky</td>
+<td style="text-align: left;">x</td>
 <td style="text-align: left;">cuteness</td>
-<td style="text-align: left;">chonky</td>
+<td style="text-align: left;">cuteness</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">28105</td>
+<td style="text-align: left;">x</td>
 <td style="text-align: left;">cuteness</td>
 <td style="text-align: left;">cuteness</td>
-<td style="text-align: left;">chonky</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">33218</td>
-<td style="text-align: left;">chonky</td>
-<td style="text-align: left;">chonky</td>
+<td style="text-align: left;">y</td>
 <td style="text-align: left;">cuteness</td>
+<td style="text-align: left;">chonky</td>
 </tr>
 </tbody>
 </table>
@@ -506,9 +506,9 @@ $(document).ready(function() {
 <h2>LIME</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p><strong>Perturbation Mechanism</strong></p>
-<p><strong>Optimization Objective</strong></p>
-<p><strong>Final Output</strong></p>
+<p><strong>Perturbation Mechanism</strong> Randomly tweaks the original input (e.g., adding noise to numbers, hiding parts of an image, or dropping words) to see how the model reacts.</p>
+<p><strong>Optimization Objective</strong> Draws the simplest possible line (a basic model) that mimics how the complex black-box model behaves right around that specific data point.</p>
+<p><strong>Final Output</strong> Feature weights that show exactly how much, and in what direction, each feature pushed that specific prediction.</p>
 </div><div class="column" style="width:40%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -524,22 +524,23 @@ Figure&nbsp;1: Geometric representation of LIME in two dimensions
 </div>
 </div>
 </div>
+</div></div>
+</section>
 <section id="kumquat" class="slide level2">
 <h2>Kumquat</h2>
 <p>Kumquats are a smaller lime-like fruit, and was developed to help people understand the inner workings of LIME and what happens within it.</p>
 <p>You can install kumquats from CRAN by running</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"kumquat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img data-src="https://facts.net/wp-content/uploads/2025/01/26-facts-about-kumquat-1737433280.jpg" style="width:50.0%"></p>
-</section>
-</div></div>
-</section>
+
+<img data-src="https://facts.net/wp-content/uploads/2025/01/26-facts-about-kumquat-1737433280.jpg" style="width:50.0%" class="r-stretch"></section>
 <section id="shap" class="slide level2">
 <h2>SHAP</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p><strong>Perturbation Mechanism</strong></p>
+<p><strong>Perturbation Mechanism</strong> Tests combinations of features being “turned on” or “turned off” (using average background data to simulate a feature being missing).</p>
 <p><strong>Optimization Objective</strong></p>
-<p><strong>Final Output</strong></p>
+<p>Uses game theory math to perfectly and fairly distribute the “credit” for the final prediction among all the features involved.</p>
+<p><strong>Final Output</strong> Shapley values, which are precise numbers for each feature that add up perfectly to explain the final prediction.</p>
 </div><div class="column" style="width:40%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -561,9 +562,9 @@ Figure&nbsp;2: Geometric representation of SHAP in two dimensions.
 <h2>Counterfactuals</h2>
 <div class="columns">
 <div class="column">
-<p><strong>Perturbation Mechanism</strong></p>
-<p><strong>Optimization Objective</strong></p>
-<p><strong>Final Output</strong></p>
+<p><strong>Perturbation Mechanism</strong> Purposely searches in a specific direction to find the exact point where the model flips its decision to a desired outcome.</p>
+<p><strong>Optimization Objective</strong> Balances two goals simultaneously: successfully changing the model’s mind while making the smallest, most realistic changes possible to the original data.</p>
+<p><strong>Final Output</strong> A “What-If” scenario (e.g., “If your income was $5,000 higher, your loan would be approved”).</p>
 </div><div class="column">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -585,9 +586,9 @@ Figure&nbsp;3: Geometric representation of Counterfactuals in two dimensions. Ho
 <h2>Anchors</h2>
 <div class="columns">
 <div class="column">
-<p><strong>Perturbation Mechanism</strong></p>
-<p><strong>Optimization Objective</strong></p>
-<p><strong>Final Output</strong></p>
+<p><strong>Perturbation Mechanism</strong> Randomly masks or replaces different parts of the original input to test which features are absolutely necessary for the prediction.</p>
+<p><strong>Optimization Objective</strong> Searches for the shortest, most rock-solid condition that locks in (or “anchors”) the model’s decision with high confidence, no matter what else changes.</p>
+<p><strong>Final Output</strong> Simple IF-THEN rules (e.g., “IF Age &gt; 35 AND Married = True, THEN Approved”).</p>
 </div><div class="column">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">

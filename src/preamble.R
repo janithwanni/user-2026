@@ -42,7 +42,7 @@ options(
 )
 
 theme_set(
-  theme_bw(base_size = 14) +
+  theme_minimal(base_size = 14) +
     theme(
       aspect.ratio = 1,
       plot.background = element_rect(fill = 'transparent', colour = NA),
@@ -54,8 +54,8 @@ theme_set(
     )
 )
 
-class_a_color <- "#1B9E77FF"
-class_b_color <- "#D95F02FF"
+class_a_color <- "#009cff"
+class_b_color <- "#ff9400"
 
 options(
   ggplot2.discrete.fill = c(class_a_color, class_b_color),

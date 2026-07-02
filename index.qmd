@@ -319,13 +319,18 @@ All local, model-agnostic XAI tools can be simplified into three common blocks:
 ::: {.column width=60%}
 
 **Perturbation Mechanism**
+Randomly tweaks the original input (e.g., adding noise to numbers, hiding parts of an image, or dropping words) to see how the model reacts.
 
 **Optimization Objective**
+Draws the simplest possible line (a basic model) that mimics how the complex black-box model behaves right around that specific data point.
 
 **Final Output**
+Feature weights that show exactly how much, and in what direction, each feature pushed that specific prediction.
 
 :::
+
 ::: {.column width=40%}
+
 ```{r}
 #| label: fig-2dim-lime
 #| fig-width: 6
@@ -337,6 +342,9 @@ All local, model-agnostic XAI tools can be simplified into three common blocks:
 #| echo: false
 lime_plot
 ```
+
+:::
+::::
 
 ## Kumquat
 
@@ -350,9 +358,6 @@ install.packages("kumquat")
 
 ![](https://facts.net/wp-content/uploads/2025/01/26-facts-about-kumquat-1737433280.jpg){width=50%}
 
-:::
-::::
-
 
 ## SHAP
 
@@ -361,10 +366,15 @@ install.packages("kumquat")
 ::: {.column width=60%}
 
 **Perturbation Mechanism**
+Tests combinations of features being "turned on" or "turned off" (using average background data to simulate a feature being missing).
 
 **Optimization Objective**
 
+Uses game theory math to perfectly and fairly distribute the "credit" for the final prediction among all the features involved.
+
 **Final Output**
+Shapley values, which are precise numbers for each feature that add up perfectly to explain the final prediction.
+
 :::
 ::: {.column width=40%}
 ```{r}
@@ -387,10 +397,14 @@ shap_plot
 ::: {.column}
 
 **Perturbation Mechanism**
+Purposely searches in a specific direction to find the exact point where the model flips its decision to a desired outcome.
 
 **Optimization Objective**
+Balances two goals simultaneously: successfully changing the model's mind while making the smallest, most realistic changes possible to the original data.
 
 **Final Output**
+A "What-If" scenario (e.g., "If your income was $5,000 higher, your loan would be approved").
+
 :::
 ::: {.column}
 ```{r}
@@ -413,10 +427,14 @@ cf_plot
 ::: {.column}
 
 **Perturbation Mechanism**
+Randomly masks or replaces different parts of the original input to test which features are absolutely necessary for the prediction.
 
 **Optimization Objective**
+Searches for the shortest, most rock-solid condition that locks in (or "anchors") the model's decision with high confidence, no matter what else changes.
 
 **Final Output**
+Simple IF-THEN rules (e.g., "IF Age > 35 AND Married = True, THEN Approved").
+
 :::
 ::: {.column}
 ```{r}
