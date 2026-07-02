@@ -90,5 +90,7 @@ disagree_table_show <- disagree_table |>
   ungroup() |>
   rename(wombat = case) |>
   mutate(across(Counterfactuals:SHAP, function(x) {
-    x |> gsub("x", "cuteness") |> gsub("y", "chonky-ness")
+    x <- gsub("x", "cuteness", x)
+    x <- gsub("y", "chonky", x)
+    return(x)
   }))

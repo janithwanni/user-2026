@@ -29,11 +29,12 @@ source("src/tables.R")
 source("src/plots.R")
 ```
 
-:::{.center-my-slide}
-
 * I'm a PhD candidate at Monash University, Australia 
 * My research work is around making it easier to explain how machine learning models work. 
+* Today I'm going to be talking about,
 
+:::{.fragment .fade-in .center}
+![](https://s3.amazonaws.com/theoatmeal-img/comics/wombats/photo.jpg){width=40%}
 :::
 
 <!-- ## AI and Machine Learning is everywhere -->
@@ -51,15 +52,19 @@ source("src/plots.R")
 
 :::{.column width=50%}
 
+:::{.incremental}
 * You were hired as a data science intern in the loan department of _OddPoverty_ Bank where you help wombats get loans for burrowing holes.
 
 * As an intern, you were given a dataset to model, which will **classify** whether a wombat is eligible for a loan.
+:::
 
 :::
 
 :::{.column width=50%}
 
+:::{.fragment .fade-in}
 ![](https://s3.amazonaws.com/theoatmeal-img/comics/wombats/9.png)
+:::
 
 :::
 
@@ -67,7 +72,10 @@ source("src/plots.R")
 
 ## The problem
 
-The dataset is a simple one for an intern,has two variables, how cute the wombat is ($x$) and how heavy the wombat is ($y$).
+The dataset is a simple one for an intern,has two variables, 
+
+1. how cute the wombat is ($x$) 
+2. how chonky the wombat is ($y$).
 
 ```{r}
 train_data_fig
@@ -83,17 +91,24 @@ model_preds_fig
 
 ## We have complaints! 
 
+::::{.columns}
+:::{.column width=45%}
+
 Three wombats came up upset that their loans were rejected, and they asked what were was the important thing that we considered to deny their loan for a burrowing hole. (Was it their cuteness or was it their chonky-ness?)
+
+![](imgs/wombat-hello.png)
+
+:::
+:::{.column width=55%}
 
 ```{r}
 poi_data_fig
 ```
 
-:::{.incremental}
-How do we explain this model to the wombats?
 :::
+::::
 
-## We need ways to eXplain AI/ML methods   
+## How do we explain this model to the wombats?
 
 Explainable AI methods or XAI methods came in as a solution to this problem. 
 
@@ -136,7 +151,7 @@ So let's pump these in to these methods and let's help our wombats out!
 knitr::kable(disagree_table_show)
 ```
 
-:::{.incremental}
+:::{.fragment .fade-in}
 Wait so which one do we tell these three wombats?
 :::
 
@@ -189,7 +204,7 @@ $(document).ready(function() {
         drawGrid: false,
         background: { color: 'transparent' },
         cellNamespace: namespace,
-        interactive: true
+        interactive: false
     });
 
     // 1. Define Inline SVG Icons (Feather Icons)
@@ -297,16 +312,7 @@ $(document).ready(function() {
 </script>
 ```
 
-## Setting the Stage for Local Explanations
-
-When shifting from *prediction* to *explanation*, the core question changes:
-
-> "Which features were most influential in giving the current prediction for this specific observation?"
-
-* Highly non-linear boundaries require **local** analysis.
-* **Model-agnostic** choices ensure the framework survives even as old models become obsolete.
-
-## The 3-Stage Explanatory Abstraction
+## Bringing it all together
 
 All local, model-agnostic XAI tools can be simplified into three common blocks:
 
@@ -324,11 +330,192 @@ All local, model-agnostic XAI tools can be simplified into three common blocks:
 * Returns an interpretable form (coefficients, rules, counterfactuals).
 :::
 
+## LIME
+
+:::: {.columns}
+::: {.column width=60%}
+
+**Perturbation Mechanism**
+
+**Optimization Objective**
+
+**Final Output**
+
+:::
+::: {.column width=40%}
+```{r}
+#| label: fig-2dim-lime
+#| fig-width: 6
+#| fig-height: 6
+#| out-width: 4in
+#| out-height: 4in
+#| fig-align: "center"
+#| fig-cap: "Geometric representation of LIME in two dimensions"
+#| echo: false
+lime_plot
+```
+
+## Kumquat
+
+Kumquats are a smaller lime-like fruit, and was developed to help people understand the inner workings of LIME and what happens within it.
+
+You can install kumquats from CRAN by running 
+
+```r
+install.packages("kumquat")
+```
+
+![](https://facts.net/wp-content/uploads/2025/01/26-facts-about-kumquat-1737433280.jpg){width=50%}
+
+:::
+::::
+
+
+## SHAP
+
+:::: {.columns}
+
+::: {.column width=60%}
+
+**Perturbation Mechanism**
+
+**Optimization Objective**
+
+**Final Output**
+:::
+::: {.column width=40%}
+```{r}
+#| label: fig-2dim-shap
+#| fig-width: 6
+#| fig-height: 6
+#| out-width: 4in
+#| out-height: 4in
+#| fig-align: "center"
+#| fig-cap: "Geometric representation of SHAP in two dimensions."
+#| echo: false
+shap_plot
+```
+:::
+::::
+
+## Counterfactuals
+
+:::: {.columns}
+::: {.column}
+
+**Perturbation Mechanism**
+
+**Optimization Objective**
+
+**Final Output**
+:::
+::: {.column}
+```{r}
+#| label: fig-2dim-cfacts
+#| echo: false
+#| fig-width: 6
+#| fig-height: 6
+#| out-width: 4in
+#| out-height: 4in
+#| fig-align: "center"
+#| fig-cap: "Geometric representation of Counterfactuals in two dimensions. Hollow diamond shapes represent the counterfactual observations for the observations in solid circles connected through a line."
+cf_plot
+```
+:::
+::::
+
+## Anchors
+
+:::: {.columns}
+::: {.column}
+
+**Perturbation Mechanism**
+
+**Optimization Objective**
+
+**Final Output**
+:::
+::: {.column}
+```{r}
+#| label: fig-2dim-anchors
+#| echo: false
+#| fig-width: 6
+#| fig-height: 6
+#| out-width: 4in
+#| out-height: 4in
+#| fig-align: "center"
+#| fig-cap: "Geometric representation of Anchors in two dimensions"
+anchor_plot
+```
+:::
+::::
+
+## Kultarr R package
+
+```{=html}
+<div style="display:flex; flex-direction: row; justify-content: space-around; align-items:center"> 
+  <img src="imgs/kultarr-banner.jpg" style="width: 50%"/>
+  <img src="imgs/kultarr.svg"/>
+</div>
+```
+
+:::: {.columns}
+::: {.column}
+The existing implementations of Anchors were quite hard to work with and were quite slow as it was using an existing Java package. 
+:::
+::: {.column}
+Kultarr is an R package that aims to provide an implementation of Anchors using a simpler algorithm and a complete set of orthogonal predicates. 
+
+Try the package out from [https://github.com/janithwanni/kultarr](https:://github.com/janithwanni/kultarr)
+
+:::
+::::
+
+## The proposed geometric represenations,
+
+<br/> 
+
+```{=html}
+<div style="display:flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; font-size: 2.5rem; font-weight: bold; gap: 2rem">
+  <div>
+    <span class = "fragment fade-right" data-fragment-index=1>
+      <span class = "accent-color">LIME</span> can be seen as
+    </span>
+    <span class = "fragment fade-left" data-fragment-index=2> 
+      <span class = "accent-light-color"> regression lines</span>
+    </span>
+  </div>
+  <div>
+    <span class="fragment fade-right" data-fragment-index=4>
+      <span class = "accent-color"> SHAP </span> can be seen as
+    </span>
+    <span class = "fragment fade-left" data-fragment-index=5> 
+      <span class = "accent-light-color"> force vectors</span>
+    </span>
+  </div>
+  <div>
+    <span class="fragment fade-right" data-fragment-index=6>
+      <span class = "accent-color"> Counterfactuals </span> can be seen as
+    </span>
+    <span class = "fragment fade-left" data-fragment-index=7> 
+      <span class = "accent-light-color"> connecting lines</span>
+    </span>
+  </div>
+  <div>
+    <span class="fragment fade-right" data-fragment-index=8>
+      <span class = "accent-color"> Anchors </span> can be seen as
+    </span>
+    <span class = "fragment fade-left" data-fragment-index=9> 
+      <span class = "accent-light-color"> boxes </span>
+    </span>
+  </div>
+</div>
+```
+
 ## In conclusion,
 
 > My key take-away message is: Visualsing XAI methods requires us to look at all parts of the pipeline.
->
-> We hope you that you get to use our proposed ideas and packages in the future when you are trying to explain models.
 
+> We hope you that you get to use our proposed ideas and packages in the future when you are trying to explain models.
 
 

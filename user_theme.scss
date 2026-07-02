@@ -47,7 +47,15 @@ $presentation-heading-color: $black;
 }
 
 .reveal blockquote {
-  color: $orange !important;
+  color: darken($orange, 10%) !important;
+  font-weight: bold !important;
 }
 
 /*-- scss:rules --*/
+.accent-color {
+  color: $orange;
+}
+
+.accent-light-color {
+  color: lighten($orange, 10%);
+}

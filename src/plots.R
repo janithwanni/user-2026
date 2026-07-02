@@ -1,3 +1,7 @@
 train_data_fig <- ggplot()
 model_preds_fig <- ggplot()
 poi_data_fig <- ggplot()
+lime_plot <- ggplot()
+shap_plot <- ggplot()
+cf_plot <- ggplot()
+anchor_plot <- ggplot()
