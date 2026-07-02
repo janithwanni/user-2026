@@ -94,7 +94,7 @@ model_preds_fig
 ::::{.columns}
 :::{.column width=45%}
 
-Three wombats came up upset that their loans were rejected, and they asked what were was the important thing that we considered to deny their loan for a burrowing hole. (Was it their cuteness or was it their chonky-ness?)
+Four wombats came up upset that their loans were rejected, and they asked what were was the important thing that we considered to deny their loan for a burrowing hole. (Was it their cuteness or was it their chonky-ness?)
 
 ![](imgs/wombat-hello.png)
 
@@ -152,7 +152,7 @@ knitr::kable(disagree_table_show)
 ```
 
 :::{.fragment .fade-in}
-Wait so which one do we tell these three wombats?
+Wait so which one do we tell these wombats?
 :::
 
 ## Algorithmic Disagreements
@@ -187,28 +187,14 @@ There are more things that came together to make these XAI explanations.
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.7.7/joint.min.js"></script>
 
 <div style="display: flex; justify-content: center; width: 100%; margin-top: 10px;">
-    <div id="xai-workflow-canvas-lr" style="background: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"></div>
+    <div id="xai-workflow-canvas-lr" style="background: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 1040px; height: 320px;"></div>
 </div>
 
 <script>
 $(document).ready(function() {
     var namespace = joint.shapes;
-    var graph = new joint.dia.Graph({}, { cellNamespace: namespace });
-
-    var paper = new joint.dia.Paper({
-        el: document.getElementById('xai-workflow-canvas-lr'),
-        model: graph,
-        width: 1040,
-        height: 320,
-        gridSize: 10,
-        drawGrid: false,
-        background: { color: 'transparent' },
-        cellNamespace: namespace,
-        interactive: false
-    });
-
-    // 1. Define Inline SVG Icons (Feather Icons)
-    // Note: Use %23 instead of # for hex colors in SVG strings
+    
+    // 1. Define Inline SVG Icons
     const svgBox = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%230d6efd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>`;
     const svgTarget = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%230d6efd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>`;
     const svgNetwork = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%230d6efd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>`;
@@ -216,22 +202,12 @@ $(document).ready(function() {
     const svgSliders = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%230d6efd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>`;
     const svgBulb = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23198754" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="M4.93 4.93l1.41 1.41"></path><path d="M17.66 17.66l1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="M6.34 17.66l-1.41 1.41"></path><path d="M19.07 4.93l-1.41 1.41"></path><path d="M9 22h6"></path><path d="M10 18h4"></path><path d="M15 12a3 3 0 0 1-6 0 5 5 0 0 1 10 0v1a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-1"></path></svg>`;
 
-    // 2. Define Custom Element (Node with an Icon)
+    // 2. Define Custom Element
     var IconNode = joint.dia.Element.define('IconNode', {
         attrs: {
-            body: {
-                refWidth: '100%', refHeight: '100%',
-                fill: '#ffffff', stroke: '#0d6efd', strokeWidth: 2, rx: 6, ry: 6
-            },
-            icon: {
-                width: 24, height: 24,
-                refX: 12, refY: '50%', refY2: -12
-            },
-            label: {
-                refX: 46, refY: '50%', textAnchor: 'start', textVerticalAnchor: 'middle',
-                fill: '#212529', fontSize: 13, fontWeight: 'bold',
-                textWrap: { width: 140, height: 50 }
-            }
+            body: { refWidth: '100%', refHeight: '100%', fill: '#ffffff', stroke: '#0d6efd', strokeWidth: 2, rx: 6, ry: 6 },
+            icon: { width: 24, height: 24, refX: 12, refY: '50%', refY2: -12 },
+            label: { refX: 46, refY: '50%', textAnchor: 'start', textVerticalAnchor: 'middle', fill: '#212529', fontSize: 13, fontWeight: 'bold', textWrap: { width: 140, height: 50 } }
         }
     }, {
         markup: [
@@ -241,31 +217,23 @@ $(document).ready(function() {
         ]
     });
 
-    // Helper: Create Subgraph Backgrounds
+    // Helpers
     function createSubgraph(id, label, x, y, width, height) {
         return new joint.shapes.standard.Rectangle({
             id: id, position: { x: x, y: y }, size: { width: width, height: height },
-            attrs: {
-                body: { fill: '#f8f9fa', stroke: '#adb5bd', strokeWidth: 2, strokeDasharray: '5,5', rx: 10, ry: 10 },
-                label: { text: label, fill: '#6c757d', fontSize: 13, fontWeight: 'bold', refY: 15, textAnchor: 'middle' }
-            }
+            attrs: { body: { fill: '#f8f9fa', stroke: '#adb5bd', strokeWidth: 2, strokeDasharray: '5,5', rx: 10, ry: 10 }, label: { text: label, fill: '#6c757d', fontSize: 13, fontWeight: 'bold', refY: 15, textAnchor: 'middle' } }
         });
     }
 
-    // Helper: Create Nodes with Data URIs
     function createNode(id, label, x, y, svgStr, colorClass) {
         var strokeColor = colorClass === 'success' ? '#198754' : '#0d6efd';
         return new IconNode({
             id: id, position: { x: x, y: y }, size: { width: 190, height: 60 },
-            attrs: {
-                body: { stroke: strokeColor },
-                icon: { 'xlink:href': 'data:image/svg+xml;utf8,' + svgStr }
-            }
+            attrs: { body: { stroke: strokeColor }, icon: { 'xlink:href': 'data:image/svg+xml;utf8,' + svgStr } }
         }).attr('label/text', label);
     }
 
-    // Helper: Create Orthogonal Links
-    function createLink(sourceId, targetId, direction) {
+    function createLink(sourceId, targetId) {
         return new joint.shapes.standard.Link({
             source: { id: sourceId }, target: { id: targetId },
             router: { name: 'manhattan', args: { startDirections: ['right'], endDirections: ['left', 'top', 'bottom'] } },
@@ -274,40 +242,55 @@ $(document).ready(function() {
         });
     }
 
-    // 3. Define Subgraphs (Left to Right flow)
-    var subInput = createSubgraph('subInput', 'Input Space', 20, 20, 230, 280);
-    var subStep1 = createSubgraph('subStep1', '1. Perturbation Mechanism', 270, 20, 230, 280);
-    var subStep2 = createSubgraph('subStep2', '2. Optimization Objective', 520, 20, 230, 280);
-    var subStep3 = createSubgraph('subStep3', '3. Final Output', 770, 20, 230, 280);
+    // --- REVEALJS VISIBILITY FIX ---
+    let isRendered = false;
+    const canvasContainer = document.getElementById('xai-workflow-canvas-lr');
 
-    // 4. Define Nodes
-    var nodeA = createNode('A', 'Trained Black-Box Model', 40, 70, svgBox);
-    var nodeB = createNode('B', 'Local Observation (x)', 40, 190, svgTarget);
-    
-    var nodeD = createNode('D', 'Compute Black-Box Mapping', 290, 70, svgSettings);
-    var nodeC = createNode('C', 'Generate Local Neighbors', 290, 190, svgNetwork);
-    
-    var nodeE = createNode('E', 'Apply Optimization Criteria', 540, 130, svgSliders);
-    var nodeF = createNode('F', 'XAI Explanation', 790, 130, svgBulb, 'success');
+    const renderChart = () => {
+        if (isRendered) return;
+        isRendered = true;
 
-    // Embed nodes into containers
-    subInput.embed(nodeA); subInput.embed(nodeB);
-    subStep1.embed(nodeC); subStep1.embed(nodeD);
-    subStep2.embed(nodeE); subStep3.embed(nodeF);
+        var graph = new joint.dia.Graph({}, { cellNamespace: namespace });
+        var paper = new joint.dia.Paper({
+            el: canvasContainer,
+            model: graph,
+            width: 1040, height: 320,
+            gridSize: 10, drawGrid: false, background: { color: 'transparent' },
+            cellNamespace: namespace, interactive: false
+        });
 
-    // Render Subgraphs and Nodes
-    graph.addCells([subInput, subStep1, subStep2, subStep3, nodeA, nodeB, nodeC, nodeD, nodeE, nodeF]);
+        var subInput = createSubgraph('subInput', 'Input Space', 20, 20, 230, 280);
+        var subStep1 = createSubgraph('subStep1', '1. Perturbation Mechanism', 270, 20, 230, 280);
+        var subStep2 = createSubgraph('subStep2', '2. Optimization Objective', 520, 20, 230, 280);
+        var subStep3 = createSubgraph('subStep3', '3. Final Output', 770, 20, 230, 280);
 
-    // 5. Connect the Workflow
-    var links = [
-        createLink('A', 'D'),
-        createLink('B', 'C'),
-        createLink('C', 'D'),
-        createLink('C', 'E'),
-        createLink('D', 'E'),
-        createLink('E', 'F')
-    ];
-    graph.addCells(links);
+        var nodeA = createNode('A', 'Trained Black-Box Model', 40, 70, svgBox);
+        var nodeB = createNode('B', 'Local Observation (x)', 40, 190, svgTarget);
+        var nodeD = createNode('D', 'Compute Black-Box Mapping', 290, 70, svgSettings);
+        var nodeC = createNode('C', 'Generate Local Neighbors', 290, 190, svgNetwork);
+        var nodeE = createNode('E', 'Apply Optimization Criteria', 540, 130, svgSliders);
+        var nodeF = createNode('F', 'XAI Explanation', 790, 130, svgBulb, 'success');
+
+        subInput.embed(nodeA); subInput.embed(nodeB);
+        subStep1.embed(nodeC); subStep1.embed(nodeD);
+        subStep2.embed(nodeE); subStep3.embed(nodeF);
+
+        graph.addCells([subInput, subStep1, subStep2, subStep3, nodeA, nodeB, nodeC, nodeD, nodeE, nodeF]);
+        graph.addCells([createLink('A', 'D'), createLink('B', 'C'), createLink('C', 'D'), createLink('C', 'E'), createLink('D', 'E'), createLink('E', 'F')]);
+    };
+
+    // Use IntersectionObserver to wait until the slide enters the viewport
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Slight delay ensures RevealJS finishes CSS scaling before JointJS calculates link routes
+                setTimeout(renderChart, 150); 
+                observer.disconnect(); // Only run once
+            }
+        });
+    }, { threshold: 0.1 });
+
+    observer.observe(canvasContainer);
 });
 </script>
 ```
