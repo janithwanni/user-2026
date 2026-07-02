@@ -14,7 +14,13 @@ format:
       theme: neutral
 ---
 
+## Hi I'm Janith
+
 ```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
 source("src/preamble.R")
 source("src/data.R")
 source("src/model.R")
@@ -23,35 +29,45 @@ source("src/tables.R")
 source("src/plots.R")
 ```
 
-## Hi I'm Janith
-
-:::{.center}
+:::{.center-my-slide}
 
 * I'm a PhD candidate at Monash University, Australia 
 * My research work is around making it easier to explain how machine learning models work. 
 
 :::
 
-## AI and Machine Learning is everywhere
+<!-- ## AI and Machine Learning is everywhere -->
+<!---->
+<!-- :::{.incremental} -->
+<!-- * Like it or not, there's a surge of models created to solve problems across domains. -->
+<!-- * It feels easy to create these models with easy to access compute power and less restrictions on mapping the inputs and outputs -->
+<!-- * But when these models are facing the public, and we can't understand how they work, that's going to be a problem! -->
+<!-- * And that is where Explainable AI (XAI) methods come in. -->
+<!-- ::: -->
 
-:::{.incremental}
-* Like it or not, there's a surge of models created to solve problems across domains.
-* It feels easy to create these models with easy to access compute power and less restrictions on mapping the inputs and outputs
-* But when these models are facing the public, and we can't understand how they work, that's going to be a problem!
-* And that is where Explainable AI (XAI) methods come in.
+## Your first day at the job
+
+::::{.columns}
+
+:::{.column width=50%}
+
+* You were hired as a data science intern in the loan department of _OddPoverty_ Bank where you help wombats get loans for burrowing holes.
+
+* As an intern, you were given a dataset to model, which will **classify** whether a wombat is eligible for a loan.
+
 :::
 
-## Let's take an example,
+:::{.column width=50%}
 
-You are working at the OddPoverty Bank where you help wombats get loans. 
+![](https://s3.amazonaws.com/theoatmeal-img/comics/wombats/9.png)
 
-and you were hired as a data science intern in the loan department,
+:::
 
-You are given the following dataset to model, which will classify whether a wombat applying for a burrow hole loan is eligible or not.
+::::
 
-it's a simple one for an intern, the dataset has two variables, how old the wombat is and how heavy the wombat is.
+## The problem
 
-the training dataset looks like as follows,
+The dataset is a simple one for an intern,has two variables, how cute the wombat is ($x$) and how heavy the wombat is ($y$).
 
 ```{r}
 train_data_fig
@@ -67,13 +83,15 @@ model_preds_fig
 
 ## We have complaints! 
 
-Three wombats came up upset that their loans were rejected, and they asked what were was the important thing that we considered to deny their loan for a burrowing hole.
+Three wombats came up upset that their loans were rejected, and they asked what were was the important thing that we considered to deny their loan for a burrowing hole. (Was it their cuteness or was it their chonky-ness?)
 
 ```{r}
 poi_data_fig
 ```
 
+:::{.incremental}
 How do we explain this model to the wombats?
+:::
 
 ## We need ways to eXplain AI/ML methods   
 
@@ -115,14 +133,16 @@ There are several key <span class = "accent-color"> local interpretability metho
 So let's pump these in to these methods and let's help our wombats out!
 
 ```{r}
-disagree_table
+knitr::kable(disagree_table_show)
 ```
 
+:::{.incremental}
 Wait so which one do we tell these three wombats?
+:::
 
 ## Algorithmic Disagreements
 
-Why did this workflow fail
+Why did this workflow fail?
 
 * Different XAI methods probe different mathematical facets of a model.
 * When you run multiple methods on the same pipeline, they **frequently yield conflicting explanations**.
@@ -275,6 +295,7 @@ $(document).ready(function() {
     graph.addCells(links);
 });
 </script>
+```
 
 ## Setting the Stage for Local Explanations
 
@@ -302,16 +323,6 @@ All local, model-agnostic XAI tools can be simplified into three common blocks:
 3. **Final Output**
 * Returns an interpretable form (coefficients, rules, counterfactuals).
 :::
-
-# Visualising XAI methods
-
-## SHAP
-
-## LIME
-
-## Counterfactuals
-
-## Anchors
 
 ## In conclusion,
 

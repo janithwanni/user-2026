@@ -24,7 +24,7 @@ $presentation-heading-color: $black;
 }
 
 .reveal .progress {
-  color: lighten($orange, 70%) !important;
+  color: $orange !important;
   height: 7px;
 }
 
@@ -36,7 +36,7 @@ $presentation-heading-color: $black;
   max-height: 4.2rem !important;
 }
 
-.center {
+.center-my-slide {
   text-align: center;
   margin: 0 auto;
   position: absolute;

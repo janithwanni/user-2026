@@ -29,7 +29,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-7eea4ee6606e8a055a0c9387a6d3f7fa.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-e3be716307401330291194d67a4ec3e9.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -141,29 +141,36 @@ Janith Wanniarachchi
 </section>
 <section id="hi-im-janith" class="slide level2">
 <h2>Hi I’m Janith</h2>
-<div class="center">
+<div class="center-my-slide">
 <ul>
 <li>I’m a PhD candidate at Monash University, Australia</li>
 <li>My research work is around making it easier to explain how machine learning models work.</li>
 </ul>
 </div>
+<!-- ## AI and Machine Learning is everywhere -->
+<!---->
+<!-- :::{.incremental} -->
+<!-- * Like it or not, there's a surge of models created to solve problems across domains. -->
+<!-- * It feels easy to create these models with easy to access compute power and less restrictions on mapping the inputs and outputs -->
+<!-- * But when these models are facing the public, and we can't understand how they work, that's going to be a problem! -->
+<!-- * And that is where Explainable AI (XAI) methods come in. -->
+<!-- ::: -->
 </section>
-<section id="ai-and-machine-learning-is-everywhere" class="slide level2">
-<h2>AI and Machine Learning is everywhere</h2>
+<section id="your-first-day-at-the-job" class="slide level2">
+<h2>Your first day at the job</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
-<li class="fragment">Like it or not, there’s a surge of models created to solve problems across domains.</li>
-<li class="fragment">It feels easy to create these models with easy to access compute power and less restrictions on mapping the inputs and outputs</li>
-<li class="fragment">But when these models are facing the public, and we can’t understand how they work, that’s going to be a problem!</li>
-<li class="fragment">And that is where Explainable AI (XAI) methods come in.</li>
+<li><p>You were hired as a data science intern in the loan department of <em>OddPoverty</em> Bank where you help wombats get loans for burrowing holes.</p></li>
+<li><p>As an intern, you were given a dataset to model, which will <strong>classify</strong> whether a wombat is eligible for a loan.</p></li>
 </ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="https://s3.amazonaws.com/theoatmeal-img/comics/wombats/9.png"></p>
+</div></div>
 </section>
-<section id="lets-take-an-example" class="slide level2">
-<h2>Let’s take an example,</h2>
-<p>You are working at the OddPoverty Bank where you help wombats get loans.</p>
-<p>and you were hired as a data science intern in the loan department,</p>
-<p>You are given the following dataset to model, which will classify whether a wombat applying for a burrow hole loan is eligible or not.</p>
-<p>it’s a simple one for an intern, the dataset has two variables, how old the wombat is and how heavy the wombat is.</p>
-<p>the training dataset looks like as follows,</p>
+<section id="the-problem" class="slide level2">
+<h2>The problem</h2>
+<p>The dataset is a simple one for an intern,has two variables, how cute the wombat is (<span class="math inline">\(x\)</span>) and how heavy the wombat is (<span class="math inline">\(y\)</span>).</p>
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
 <section id="time-to-get-modeling" class="slide level2">
@@ -173,7 +180,7 @@ Janith Wanniarachchi
 <img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
 <section id="we-have-complaints" class="slide level2">
 <h2>We have complaints!</h2>
-<p>Three wombats came up upset that their loans were rejected, and they asked what were was the important thing that we considered to deny their loan for a burrowing hole.</p>
+<p>Three wombats came up upset that their loans were rejected, and they asked what were was the important thing that we considered to deny their loan for a burrowing hole. (Was it their cuteness or was it their chonky-ness?)</p>
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><p>How do we explain this model to the wombats?</p>
 </section>
@@ -208,22 +215,50 @@ Janith Wanniarachchi
 <h2>Using XAI methods</h2>
 <p>So let’s pump these in to these methods and let’s help our wombats out!</p>
 <div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 4
-# Groups:   case [4]
-   case Counterfactuals lime  SHAP 
-  &lt;int&gt; &lt;chr&gt;           &lt;chr&gt; &lt;chr&gt;
-1 20211 x               y     y    
-2 27678 y               x     y    
-3 28105 x               x     y    
-4 33218 y               y     x    </code></pre>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">wombat</th>
+<th style="text-align: left;">Counterfactuals</th>
+<th style="text-align: left;">lime</th>
+<th style="text-align: left;">SHAP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">20211</td>
+<td style="text-align: left;">chonky-ness</td>
+<td style="text-align: left;">chonky-ness</td>
+<td style="text-align: left;">chonky-ness</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">27678</td>
+<td style="text-align: left;">chonky-ness</td>
+<td style="text-align: left;">chonky-ness</td>
+<td style="text-align: left;">chonky-ness</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">28105</td>
+<td style="text-align: left;">chonky-ness</td>
+<td style="text-align: left;">chonky-ness</td>
+<td style="text-align: left;">chonky-ness</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">33218</td>
+<td style="text-align: left;">chonky-ness</td>
+<td style="text-align: left;">chonky-ness</td>
+<td style="text-align: left;">chonky-ness</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <p>Wait so which one do we tell these three wombats?</p>
 </section>
 <section id="algorithmic-disagreements" class="slide level2">
 <h2>Algorithmic Disagreements</h2>
-<p>Why did this workflow fail</p>
+<p>Why did this workflow fail?</p>
 <ul>
 <li>Different XAI methods probe different mathematical facets of a model.</li>
 <li>When you run multiple methods on the same pipeline, they <strong>frequently yield conflicting explanations</strong>.</li>
@@ -248,9 +283,11 @@ Janith Wanniarachchi
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.1/backbone-min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.7.7/joint.min.js"></script>
+
 <div style="display: flex; justify-content: center; width: 100%; margin-top: 10px;">
-<pre><code>&lt;div id="xai-workflow-canvas-lr" style="background: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"&gt;&lt;/div&gt;</code></pre>
+    <div id="xai-workflow-canvas-lr" style="background: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"></div>
 </div>
+
 <script>
 $(document).ready(function() {
     var namespace = joint.shapes;
@@ -405,23 +442,6 @@ $(document).ready(function() {
 <li class="fragment">Returns an interpretable form (coefficients, rules, counterfactuals).</li>
 </ul>
 </section>
-<section>
-<section id="visualising-xai-methods" class="title-slide slide level1 center">
-<h1>Visualising XAI methods</h1>
-
-</section>
-<section id="shap" class="slide level2">
-<h2>SHAP</h2>
-</section>
-<section id="lime" class="slide level2">
-<h2>LIME</h2>
-</section>
-<section id="counterfactuals" class="slide level2">
-<h2>Counterfactuals</h2>
-</section>
-<section id="anchors" class="slide level2">
-<h2>Anchors</h2>
-</section>
 <section id="in-conclusion" class="slide level2">
 <h2>In conclusion,</h2>
 <blockquote>
@@ -429,7 +449,7 @@ $(document).ready(function() {
 <p>We hope you that you get to use our proposed ideas and packages in the future when you are trying to explain models.</p>
 </blockquote>
 
-</section></section>
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

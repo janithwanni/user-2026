@@ -84,3 +84,11 @@ two_dim_shap_poi <- twod_shaps$S |> as_tibble()
 ## --- CF
 twod_cfact_poi <- data_space_poi |>
   cbind(twod_cfacts |> rename(xc = x, yc = y) |> select(xc, yc))
+
+
+disagree_table_show <- disagree_table |>
+  ungroup() |>
+  rename(wombat = case) |>
+  mutate(across(Counterfactuals:SHAP, function(x) {
+    x |> gsub("x", "cuteness") |> gsub("y", "chonky-ness")
+  }))
