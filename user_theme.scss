@@ -14,6 +14,7 @@ $body-font-color: $black;
 $font-family-sans-serif: $base-font;
 $presentation-heading-font: $heading-font;
 $presentation-heading-color: $black;
+$heading-letter-spacing: 0.001em;
 
 .slide-menu-button {
   display: none;
@@ -49,6 +50,19 @@ $presentation-heading-color: $black;
 .reveal blockquote {
   color: darken($orange, 10%) !important;
   font-weight: bold !important;
+}
+
+strong {
+  color: $orange;
+}
+
+reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  letter-spacing: $heading-letter-spacing !important;
 }
 
 /*-- scss:rules --*/

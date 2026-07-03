@@ -73,9 +73,14 @@ disagree_table <- guess_table |>
   group_by(case, name) |>
   filter(abs(value) == max(abs(value))) |>
   select(case, name, feature) |>
-  pivot_wider(id_cols = case, values_from = feature, values_fn = \(x) {
-    paste(x, collapse = ',')
-  })
+  pivot_wider(
+    id_cols = case,
+    names_from = name,
+    values_from = feature,
+    values_fn = \(x) {
+      paste(x, collapse = ',')
+    }
+  )
 
 ## ---- SHAP
 two_dim_shap_poi <- twod_shaps$S |> as_tibble()
@@ -88,9 +93,10 @@ twod_cfact_poi <- data_space_poi |>
 
 disagree_table_show <- disagree_table |>
   ungroup() |>
-  rename(wombat = case) |>
   mutate(across(Counterfactuals:SHAP, function(x) {
     x <- gsub("x", "cuteness", x)
     x <- gsub("y", "chonky", x)
     return(x)
-  }))
+  })) |>
+  right_join(data_space_poi |> select(case = index, wombat_name)) |>
+  select(wombat = wombat_name, lime, SHAP, Counterfactuals)

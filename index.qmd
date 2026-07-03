@@ -29,12 +29,15 @@ source("src/tables.R")
 source("src/plots.R")
 ```
 
+:::{.center-my-slide}
 * I'm a PhD candidate at Monash University, Australia 
 * My research work is around making it easier to explain how machine learning models work. 
 * Today I'm going to be talking about,
 
 :::{.fragment .fade-in .center}
 ![](https://s3.amazonaws.com/theoatmeal-img/comics/wombats/photo.jpg){width=40%}
+:::
+
 :::
 
 <!-- ## AI and Machine Learning is everywhere -->
@@ -74,8 +77,8 @@ source("src/plots.R")
 
 The dataset is a simple one for an intern,has two variables, 
 
-1. how cute the wombat is ($x$) 
-2. how chonky the wombat is ($y$).
+1. How cute the wombat is ($x$) 
+2. How chonky the wombat is ($y$).
 
 ```{r}
 train_data_fig
@@ -83,18 +86,29 @@ train_data_fig
 
 ## Time to get modeling,
 
+::::{.columns}
+:::{.column}
 You get around to making a model that works well, to double check you follow a model in data space visualisation like as follows
+:::
 
+:::{.column}
 ```{r}
 model_preds_fig
 ```
+:::
+::::
 
 ## We have complaints! 
 
 ::::{.columns}
 :::{.column width=45%}
 
-Four wombats came up upset that their loans were rejected, and they asked what were was the important thing that we considered to deny their loan for a burrowing hole. (Was it their cuteness or was it their chonky-ness?)
+Four wombats came up upset that their loans were rejected, and they asked **what was the important thing that we considered to deny their loan** for a burrowing hole. (Was it their cuteness or was it their chonky-ness?)
+
+<!-- :::{.callout-note} -->
+<!-- Fun fact: These are names of actual wombats in Australian Zoos, and Minibus is the name of the wombat that was Steve Irwin's favourite. -->
+<!-- ::: -->
+
 
 ![](imgs/wombat-hello.png)
 
@@ -104,6 +118,7 @@ Four wombats came up upset that their loans were rejected, and they asked what w
 ```{r}
 poi_data_fig
 ```
+
 
 :::
 ::::
@@ -472,7 +487,7 @@ Try the package out from [https://github.com/janithwanni/kultarr](https:://githu
 :::
 ::::
 
-## The proposed geometric represenations,
+## The proposed geometric representations,
 
 <br/> 
 
@@ -513,10 +528,29 @@ Try the package out from [https://github.com/janithwanni/kultarr](https:://githu
 </div>
 ```
 
-## In conclusion,
+## What did we learn?
 
-> My key take-away message is: Visualsing XAI methods requires us to look at all parts of the pipeline.
+Understanding the prediction requires us to understand all the parts that come before it
 
-> We hope you that you get to use our proposed ideas and packages in the future when you are trying to explain models.
+:::{.fragment .fade-in}
+This extends to our everyday interactions with AI as well!
+:::
 
+When it comes to XAI explanations, 
 
+we need to use the geometric representations along with putting the model in the data space to look at the explanation in place with the data and the model's prediction.
+
+## But what happened to the wombats?
+
+Explaining to the wombats what were the reasons for their rejection requires us to look at the visuals individually to understand 
+
+:::{.incremental}
+1. which part of the model is being explained?
+2. is the xai method that you are using appropriate to answer the question?
+:::
+
+How exactly that should be done will be a future story! 
+
+:::{.fragment .fade-in}
+Which I should be finishing as part of my PhD
+:::

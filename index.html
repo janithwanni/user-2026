@@ -95,7 +95,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-542ceba6fc6a69b02a3d82aa8bb7d34c.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-66cc5da8c89b07d65fc5635dd62b3ed8.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -207,6 +207,7 @@ Janith Wanniarachchi
 </section>
 <section id="hi-im-janith" class="slide level2">
 <h2>Hi I’m Janith</h2>
+<div class="center-my-slide">
 <ul>
 <li>I’m a PhD candidate at Monash University, Australia</li>
 <li>My research work is around making it easier to explain how machine learning models work.</li>
@@ -214,6 +215,7 @@ Janith Wanniarachchi
 </ul>
 <div class="fragment fade-in center">
 <p><img data-src="https://s3.amazonaws.com/theoatmeal-img/comics/wombats/photo.jpg" style="width:40.0%"></p>
+</div>
 </div>
 <!-- ## AI and Machine Learning is everywhere -->
 <!---->
@@ -242,21 +244,36 @@ Janith Wanniarachchi
 <h2>The problem</h2>
 <p>The dataset is a simple one for an intern,has two variables,</p>
 <ol type="1">
-<li>how cute the wombat is (<span class="math inline">\(x\)</span>)</li>
-<li>how chonky the wombat is (<span class="math inline">\(y\)</span>).</li>
+<li>How cute the wombat is (<span class="math inline">\(x\)</span>)</li>
+<li>How chonky the wombat is (<span class="math inline">\(y\)</span>).</li>
 </ol>
 
 <img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
 <section id="time-to-get-modeling" class="slide level2">
 <h2>Time to get modeling,</h2>
+<div class="columns">
+<div class="column">
 <p>You get around to making a model that works well, to double check you follow a model in data space visualisation like as follows</p>
-
-<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
+</div><div class="column">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
 <section id="we-have-complaints" class="slide level2">
 <h2>We have complaints!</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
-<p>Four wombats came up upset that their loans were rejected, and they asked what were was the important thing that we considered to deny their loan for a burrowing hole. (Was it their cuteness or was it their chonky-ness?)</p>
+<p>Four wombats came up upset that their loans were rejected, and they asked <strong>what was the important thing that we considered to deny their loan</strong> for a burrowing hole. (Was it their cuteness or was it their chonky-ness?)</p>
+<!-- :::{.callout-note} -->
+<!-- Fun fact: These are names of actual wombats in Australian Zoos, and Minibus is the name of the wombat that was Steve Irwin's favourite. -->
+<!-- ::: -->
 <p><img data-src="imgs/wombat-hello.png"></p>
 </div><div class="column" style="width:55%;">
 <div class="cell" data-layout-align="center">
@@ -305,7 +322,7 @@ Janith Wanniarachchi
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th style="text-align: right;">wombat</th>
+<th style="text-align: left;">wombat</th>
 <th style="text-align: left;">lime</th>
 <th style="text-align: left;">SHAP</th>
 <th style="text-align: left;">Counterfactuals</th>
@@ -313,26 +330,26 @@ Janith Wanniarachchi
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">20211</td>
-<td style="text-align: left;">x,y</td>
+<td style="text-align: left;">elle</td>
+<td style="text-align: left;">chonky</td>
 <td style="text-align: left;">cuteness</td>
-<td style="text-align: left;">cuteness</td>
+<td style="text-align: left;">chonky</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">27678</td>
-<td style="text-align: left;">x</td>
+<td style="text-align: left;">minibus</td>
 <td style="text-align: left;">cuteness</td>
-<td style="text-align: left;">cuteness</td>
+<td style="text-align: left;">chonky</td>
+<td style="text-align: left;">chonky</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">28105</td>
-<td style="text-align: left;">x</td>
+<td style="text-align: left;">ringo</td>
 <td style="text-align: left;">cuteness</td>
+<td style="text-align: left;">chonky</td>
 <td style="text-align: left;">cuteness</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">33218</td>
-<td style="text-align: left;">y</td>
+<td style="text-align: left;">kato</td>
+<td style="text-align: left;">chonky</td>
 <td style="text-align: left;">cuteness</td>
 <td style="text-align: left;">chonky</td>
 </tr>
@@ -620,8 +637,8 @@ Figure&nbsp;4: Geometric representation of Anchors in two dimensions
 <p>Try the package out from <a href="https:://github.com/janithwanni/kultarr">https://github.com/janithwanni/kultarr</a></p>
 </div></div>
 </section>
-<section id="the-proposed-geometric-represenations" class="slide level2">
-<h2>The proposed geometric represenations,</h2>
+<section id="the-proposed-geometric-representations" class="slide level2">
+<h2>The proposed geometric representations,</h2>
 <p><br></p>
 <div style="display:flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; font-size: 2.5rem; font-weight: bold; gap: 2rem">
   <div>
@@ -658,14 +675,26 @@ Figure&nbsp;4: Geometric representation of Anchors in two dimensions
   </div>
 </div>
 </section>
-<section id="in-conclusion" class="slide level2">
-<h2>In conclusion,</h2>
-<blockquote>
-<p>My key take-away message is: Visualsing XAI methods requires us to look at all parts of the pipeline.</p>
-</blockquote>
-<blockquote>
-<p>We hope you that you get to use our proposed ideas and packages in the future when you are trying to explain models.</p>
-</blockquote>
+<section id="what-did-we-learn" class="slide level2">
+<h2>What did we learn?</h2>
+<p>Understanding the prediction requires us to understand all the parts that come before it</p>
+<div class="fragment fade-in">
+<p>This extends to our everyday interactions with AI as well!</p>
+</div>
+<p>When it comes to XAI explanations,</p>
+<p>we need to use the geometric representations along with putting the model in the data space to look at the explanation in place with the data and the model’s prediction.</p>
+</section>
+<section id="but-what-happened-to-the-wombats" class="slide level2">
+<h2>But what happened to the wombats?</h2>
+<p>Explaining to the wombats what were the reasons for their rejection requires us to look at the visuals individually to understand</p>
+<ol type="1">
+<li class="fragment">which part of the model is being explained?</li>
+<li class="fragment">is the xai method that you are using appropriate to answer the question?</li>
+</ol>
+<p>How exactly that should be done will be a future story!</p>
+<div class="fragment fade-in">
+<p>Which I should be finishing as part of my PhD</p>
+</div>
 
 </section>
     </div>

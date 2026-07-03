@@ -28,9 +28,12 @@ data_space_preds <- data_space |>
     )
   )
 
+wombat_names <- c("elle", "minibus", "ringo", "kato")
+
 data_space_poi <- data_space_preds |>
   dplyr::filter(index %in% data_space_poids) |>
-  dplyr::mutate(label = match(index, data_space_poids))
+  dplyr::mutate(label = match(index, data_space_poids)) |>
+  dplyr::mutate(wombat_name = wombat_names[label])
 
 two_dim_data <- two_dim_data |>
   mutate(preds = predict(rf_model_2d, two_dim_data))

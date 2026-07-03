@@ -3,7 +3,7 @@ deterministic_boundary <- function(data) {
     mutate(
       class = factor(case_when(
         x < (-0.5) & y < (-0.3) ~ "Accept",
-        x >= -0.5 & x < 0.4 & y < 0.1 + 0.8 * x ~ "Reject",
+        x >= -0.5 & x < 0.4 & y < 0.1 + 0.8 * x ~ "Accept",
         x >= 0.4 ~ "Accept",
         .default = "Reject"
       ))
@@ -18,7 +18,6 @@ train_indices <- sample(
   floor(nrow(d_multitwo) * 0.001)
 )
 two_dim_data <- d_multitwo |>
-  deterministic_boundary() |>
   dplyr::mutate(index = dplyr::row_number(), class = factor(class))
 
 test_two_dim_data <- d_multitwo |>
