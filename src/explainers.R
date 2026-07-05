@@ -96,7 +96,7 @@ if (CLEAN_RUN) {
     seed = 145,
     parallel = FALSE,
     progress = FALSE,
-    instance_lbls = two_dim_pois
+    instance_lbls = data_space_poids
   )
   saveRDS(final_bounds, here::here(anchor_loc))
 }

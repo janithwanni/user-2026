@@ -32,7 +32,7 @@ source("src/plots.R")
 :::{.center-my-slide}
 * I'm a PhD candidate at Monash University, Australia 
 * My research work is around making it easier to explain how machine learning models work. 
-* Today I'm going to be talking about,
+* Today I'm going to be talking about
 
 :::{.fragment .fade-in .center}
 ![](https://s3.amazonaws.com/theoatmeal-img/comics/wombats/photo.jpg){width=40%}
@@ -75,7 +75,8 @@ source("src/plots.R")
 
 ## The problem
 
-The dataset is a simple one for an intern,has two variables, 
+The bank has collected a historical data of the wombats who applied for loans. 
+The dataset is a simple one with two variables,
 
 1. How cute the wombat is ($x$) 
 2. How chonky the wombat is ($y$).
@@ -88,7 +89,16 @@ train_data_fig
 
 ::::{.columns}
 :::{.column}
-You get around to making a model that works well, to double check you follow a model in data space visualisation like as follows
+You get around to making a model that works well, to double check you, 
+
+:::{.incremental}
+
+1. Create a synthetic dataset that covers the range of features
+2. Apply the model to the entire region
+3. Visualize the predictions from the model (which we call a model-in-data-space visualisation)
+
+:::
+
 :::
 
 :::{.column}
@@ -151,6 +161,7 @@ How the model gives a prediction to one single instance using <span class="accen
 
 ## Explaining one prediction
 
+:::{.center-my-slide}
 There are several key <span class = "accent-color"> local interpretability methods </span> that are related to each other in how they approach the problem
 
 1. LIME (Local Interpretable Model agnostic Explanations)
@@ -158,35 +169,49 @@ There are several key <span class = "accent-color"> local interpretability metho
 2. Anchors
 3. Counterfactuals
 
+:::
+
 ## Using XAI methods 
 
-So let's pump these in to these methods and let's help our wombats out!
+So let's apply these methods to our model to help our wombats out!
 
+:::{style="padding: 1em"}
 ```{r}
 knitr::kable(disagree_table_show)
 ```
-
-:::{.fragment .fade-in}
-Wait so which one do we tell these wombats?
 :::
 
-## Algorithmic Disagreements
+:::{.fragment .fade-in}
+**Wait...** so which one do we tell these wombats?
+:::
 
-Why did this workflow fail?
+## Why did this workflow fail?
 
-* Different XAI methods probe different mathematical facets of a model.
-* When you run multiple methods on the same pipeline, they **frequently yield conflicting explanations**.
-
-We must manually reconcile abstract mathematical formulas with raw numerical outputs.
-
-## The Isolation Problem
-
-Despite XAI advances, current state-of-the-art tools operate in a vacuum.
-
+* Different XAI methods examine different mathematical facets of the model.
+* With that, disagreements are bound to happen.
+* Most tools right now, look at the numbers themselves.
 * We don't see how these explanations relate to the data itself or the model's actual internal view of the data. 
-* There's more to the story than just the final explanations 
 
-We are left navigating a fragmented, disconnected ecosystem.
+There's more to the story than just the final explanations 
+
+## Bringing it all together
+
+All local, model-agnostic XAI tools can be simplified into three common blocks:
+
+::: {.incremental}
+
+1. **Perturbation Mechanism**
+* Generates synthetic observations in the neighborhood of the target observation.
+
+
+2. **Optimization Objective**
+* Finds a simpler model, a feature importance or a region that best solves the problem of each XAI method.
+
+
+3. **Structure of Output**
+* Returns an interpretable form (coefficients, rules, counterfactuals).
+
+:::
 
 ## Let's break it apart
 
@@ -310,37 +335,21 @@ $(document).ready(function() {
 </script>
 ```
 
-## Bringing it all together
-
-All local, model-agnostic XAI tools can be simplified into three common blocks:
-
-::: {.incremental}
-
-1. **Perturbation Mechanism**
-* Generates synthetic observations in the neighborhood of the target observation (e.g., masking, local sampling).
-
-
-2. **Optimization Objective**
-* Evaluates black-box mappings against a criterion (surrogate loss, axioms, distance metrics).
-
-
-3. **Final Output**
-* Returns an interpretable form (coefficients, rules, counterfactuals).
-:::
-
 ## LIME
 
 :::: {.columns}
 ::: {.column width=60%}
 
 **Perturbation Mechanism**
-Randomly tweaks the original input (e.g., adding noise to numbers, hiding parts of an image, or dropping words) to see how the model reacts.
+Randomly adding noise to the original data to generate a local neighbourhood to see how the model reacts.
 
 **Optimization Objective**
-Draws the simplest possible line (a basic model) that mimics how the complex black-box model behaves right around that specific data point.
+Finds the simplest possible model that mimics how the complex model behaves for the randomly generated dataset from the previous part. 
+
+<!-- Bring the story up again in this section -->
 
 **Final Output**
-Feature weights that show exactly how much, and in what direction, each feature pushed that specific prediction.
+Coefficients that show exactly how much, and in what direction, each feature pushed that specific prediction.
 
 :::
 
@@ -348,31 +357,13 @@ Feature weights that show exactly how much, and in what direction, each feature 
 
 ```{r}
 #| label: fig-2dim-lime
-#| fig-width: 6
-#| fig-height: 6
-#| out-width: 4in
-#| out-height: 4in
 #| fig-align: "center"
-#| fig-cap: "Geometric representation of LIME in two dimensions"
 #| echo: false
 lime_plot
 ```
 
 :::
 ::::
-
-## Kumquat
-
-Kumquats are a smaller lime-like fruit, and was developed to help people understand the inner workings of LIME and what happens within it.
-
-You can install kumquats from CRAN by running 
-
-```r
-install.packages("kumquat")
-```
-
-![](https://facts.net/wp-content/uploads/2025/01/26-facts-about-kumquat-1737433280.jpg){width=50%}
-
 
 ## SHAP
 
@@ -381,25 +372,20 @@ install.packages("kumquat")
 ::: {.column width=60%}
 
 **Perturbation Mechanism**
-Tests combinations of features being "turned on" or "turned off" (using average background data to simulate a feature being missing).
+Tests combinations of features being "turned on" or "turned off".
 
 **Optimization Objective**
 
-Uses game theory math to perfectly and fairly distribute the "credit" for the final prediction among all the features involved.
+Uses game theory math to fairly distribute the "credit" for the final prediction among all the features involved.
 
 **Final Output**
-Shapley values, which are precise numbers for each feature that add up perfectly to explain the final prediction.
+Coefficients that show the effect of each feature being included in the model.
 
 :::
 ::: {.column width=40%}
 ```{r}
 #| label: fig-2dim-shap
-#| fig-width: 6
-#| fig-height: 6
-#| out-width: 4in
-#| out-height: 4in
 #| fig-align: "center"
-#| fig-cap: "Geometric representation of SHAP in two dimensions."
 #| echo: false
 shap_plot
 ```
@@ -412,25 +398,21 @@ shap_plot
 ::: {.column}
 
 **Perturbation Mechanism**
-Purposely searches in a specific direction to find the exact point where the model flips its decision to a desired outcome.
+Generates synthetic candidates around the observation by adding noise.
 
 **Optimization Objective**
-Balances two goals simultaneously: successfully changing the model's mind while making the smallest, most realistic changes possible to the original data.
+
+Simultaneously balances the goals of reaching the required model output while also making the smallest, realistic change possible to the dataset.
 
 **Final Output**
-A "What-If" scenario (e.g., "If your income was $5,000 higher, your loan would be approved").
+The closest observation that satisfies the conditions (e.g., "If the wombat was less chonky the loan would be accepted. ").
 
 :::
 ::: {.column}
 ```{r}
 #| label: fig-2dim-cfacts
 #| echo: false
-#| fig-width: 6
-#| fig-height: 6
-#| out-width: 4in
-#| out-height: 4in
 #| fig-align: "center"
-#| fig-cap: "Geometric representation of Counterfactuals in two dimensions. Hollow diamond shapes represent the counterfactual observations for the observations in solid circles connected through a line."
 cf_plot
 ```
 :::
@@ -442,32 +424,30 @@ cf_plot
 ::: {.column}
 
 **Perturbation Mechanism**
-Randomly masks or replaces different parts of the original input to test which features are absolutely necessary for the prediction.
+Generate synthetic data in a fixed boundary around the local neighborhood
 
 **Optimization Objective**
-Searches for the shortest, most rock-solid condition that locks in (or "anchors") the model's decision with high confidence, no matter what else changes.
+Tries to find the set of conditions that creates the biggest possible bounding box within that region containing observations similar to that of the given observation. 
 
 **Final Output**
-Simple IF-THEN rules (e.g., "IF Age > 35 AND Married = True, THEN Approved").
+A bounding box within the fixed boundary region that contains points similar classified as the observation. 
 
 :::
 ::: {.column}
 ```{r}
 #| label: fig-2dim-anchors
 #| echo: false
-#| fig-width: 6
-#| fig-height: 6
-#| out-width: 4in
-#| out-height: 4in
 #| fig-align: "center"
-#| fig-cap: "Geometric representation of Anchors in two dimensions"
 anchor_plot
 ```
 :::
 ::::
 
-## Kultarr R package
+## Our contribution
 
+::::{.columns}
+
+:::{.column}
 ```{=html}
 <div style="display:flex; flex-direction: row; justify-content: space-around; align-items:center"> 
   <img src="imgs/kultarr-banner.jpg" style="width: 50%"/>
@@ -475,19 +455,34 @@ anchor_plot
 </div>
 ```
 
-:::: {.columns}
-::: {.column}
-The existing implementations of Anchors were quite hard to work with and were quite slow as it was using an existing Java package. 
-:::
-::: {.column}
-Kultarr is an R package that aims to provide an implementation of Anchors using a simpler algorithm and a complete set of orthogonal predicates. 
+Kultarr is an R package that aims to provide an implementation of Anchors using a simpler algorithm.
 
 Try the package out from [https://github.com/janithwanni/kultarr](https:://github.com/janithwanni/kultarr)
 
 :::
+
+:::{.column}
+
+```{=html}
+<div style="display:flex; flex-direction: row; justify-content: space-around; align-items:center; width: 100%;"> 
+<img src="https://facts.net/wp-content/uploads/2025/01/26-facts-about-kumquat-1737433280.jpg" style="width:50%"/>
+<img src="imgs/sticker.png" style="width:50%"/>
+</div>
+```
+
+Kumquats are a smaller lime-like fruit, and was developed to help people understand the inner workings of LIME and what happens within it by exposing a lot of the inner workings within R.
+
+You can install kumquats from CRAN by running 
+
+```{r}
+#| eval: false
+#| echo: true
+install.packages("kumquat")
+```
+:::
 ::::
 
-## The proposed geometric representations,
+## The proposed geometric representations
 
 <br/> 
 
@@ -528,29 +523,58 @@ Try the package out from [https://github.com/janithwanni/kultarr](https:://githu
 </div>
 ```
 
-## What did we learn?
-
-Understanding the prediction requires us to understand all the parts that come before it
-
-:::{.fragment .fade-in}
-This extends to our everyday interactions with AI as well!
-:::
-
-When it comes to XAI explanations, 
-
-we need to use the geometric representations along with putting the model in the data space to look at the explanation in place with the data and the model's prediction.
-
-## But what happened to the wombats?
-
-Explaining to the wombats what were the reasons for their rejection requires us to look at the visuals individually to understand 
+## How can we help the wombats?
 
 :::{.incremental}
-1. which part of the model is being explained?
-2. is the xai method that you are using appropriate to answer the question?
+* Explaining to the wombats what were the reasons for their rejection requires us to look at the visuals individually to understand.
+
+1. Which part of the model is being explained?
+2. Is the xai method that you are using appropriate to answer the question?
+
+* We need to use the geometric representations along with putting the model in the data space to look at the explanation in place with the data and the model's prediction.
+
+* For that we have provided two R packages (**kumquat** and **kultarr**) that makes it easier to break open XAI methods and inspect its inner pieces.
 :::
 
-How exactly that should be done will be a future story! 
+## Thank you! {.center}
 
-:::{.fragment .fade-in}
-Which I should be finishing as part of my PhD
-:::
+Have any suggestions or ideas? {{< fa comment >}}
+
+```{=html}
+<div class = "card-container">
+  <div class="card">
+    <div class="card-text">
+      <div class="portada">
+        <img src = "imgs/banner_img_1.jpg" />
+        <span style="font-size: 0.7rem; font-style: italic;"> The colour palette for these slides are inspired by the photograph by Bill Henson as part of the art installation Oneiroi in the Hellenic Museum, Melbourne. </span>
+      </div>
+      <div class="title-total"> 
+        <div class = "img-container">
+          <div class = "img-avatar">
+            <img src = "imgs/profile_picture.jpeg "/>
+          </div>
+        </div>
+        <h4 class="accent-color">Janith Wanniarachchi</h4>
+        <div class="desc">
+          <div>
+            <span> <i class="fa-regular fa-envelope fa-sm"></i> </span> 
+            <span class = "contact-detail"> janith.wanniarachchi@monash.edu </span>
+          </div>
+          <div>
+            <span> <i class="fa-brands fa-github-alt fa-sm"></i> </span>
+            <span class = "contact-detail"> @janithwanni </span>
+          </div>
+          <div>
+            <span> <i class = "fa-brands fa-linkedin"></i></span>
+            <span class = "contact-detail"> janith-wanniarachchi </span>
+          </div>
+          <div>
+            <span> <i class = "fa-solid fa-globe fa-sm"></i> </span>
+            <span class = "contact-detail"> janithwanni.com </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```

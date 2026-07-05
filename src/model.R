@@ -28,7 +28,7 @@ data_space_preds <- data_space |>
     )
   )
 
-wombat_names <- c("elle", "minibus", "ringo", "kato")
+wombat_names <- c("Elle", "Minibus", "Ringo", "Kato")
 
 data_space_poi <- data_space_preds |>
   dplyr::filter(index %in% data_space_poids) |>

@@ -30,7 +30,7 @@ data_space <- expand_grid(x = seq(-1, 1, 0.01), y = seq(-1, 1, 0.01)) |>
 data_space <- deterministic_boundary(data_space)
 
 two_dim_pois <- c(3604, 3332, 565, 308, 2778) |> sort()
-data_space_poids <- c(27678, 20211, 33218, 28105) |> sort()
+data_space_poids <- c(27678, 20818, 33218, 28105) |> sort()
 
 two_dim_poi_data <- two_dim_data |>
   dplyr::filter(index %in% two_dim_pois) |>

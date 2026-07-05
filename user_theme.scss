@@ -73,3 +73,103 @@ reveal h1,
 .accent-light-color {
   color: lighten($orange, 10%);
 }
+
+#thank-you {
+  top: 0;
+}
+
+.card-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.3);
+  display: flex;
+  flex-direction: row;
+  border-radius: 25px;
+  position: relative;
+  max-width: 95%;
+}
+.card h2 {
+  margin: 0;
+  padding: 0 1rem;
+}
+.card .title {
+  padding: 1rem;
+  text-align: right;
+  color: green;
+  font-weight: bold;
+  font-size: 12px;
+}
+.card .desc {
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+}
+
+.card svg {
+  width: 85px;
+  height: 85px;
+  margin: 0 auto;
+}
+
+.img-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.img-container h4 {
+  text-align: center;
+}
+
+.title-total h4 {
+  color: darken($orange, 10%) !important;
+}
+
+.desc {
+  color: $black !important;
+}
+
+.img-avatar {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  border: 6px solid white;
+  background-image: linear-gradient(-60deg, #16a085 0%, #f4d03f 100%);
+  overflow: hidden;
+}
+
+.img-avatar img {
+  width: 100%;
+  margin: 0 !important;
+  max-width: fit-content !important;
+  max-height: fit-content !important;
+}
+
+.card-text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.title-total {
+  padding: 2em 0;
+}
+
+.img-portada {
+  width: 100%;
+}
+
+.portada {
+  height: 100%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 3em;
+}

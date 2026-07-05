@@ -93,10 +93,10 @@ twod_cfact_poi <- data_space_poi |>
 
 disagree_table_show <- disagree_table |>
   ungroup() |>
-  mutate(across(Counterfactuals:SHAP, function(x) {
+  mutate(across(lime:Anchors, function(x) {
     x <- gsub("x", "cuteness", x)
     x <- gsub("y", "chonky", x)
     return(x)
   })) |>
   right_join(data_space_poi |> select(case = index, wombat_name)) |>
-  select(wombat = wombat_name, lime, SHAP, Counterfactuals)
+  select(Wombat = wombat_name, Lime = lime, SHAP, Counterfactuals, Anchors)
