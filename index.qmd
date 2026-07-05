@@ -196,7 +196,7 @@ There's more to the story than just the final explanations
 
 ## Bringing it all together
 
-All local, model-agnostic XAI tools can be simplified into three common blocks:
+Our local, model-agnostic XAI tools can be simplified into three common blocks:
 
 ::: {.incremental}
 
@@ -338,7 +338,7 @@ $(document).ready(function() {
 ## LIME
 
 :::: {.columns}
-::: {.column width=60%}
+::: {.column}
 
 **Perturbation Mechanism**
 Randomly adding noise to the original data to generate a local neighbourhood to see how the model reacts.
@@ -353,7 +353,7 @@ Coefficients that show exactly how much, and in what direction, each feature pus
 
 :::
 
-::: {.column width=40%}
+::: {.column}
 
 ```{r}
 #| label: fig-2dim-lime
@@ -369,7 +369,7 @@ lime_plot
 
 :::: {.columns}
 
-::: {.column width=60%}
+::: {.column}
 
 **Perturbation Mechanism**
 Tests combinations of features being "turned on" or "turned off".
@@ -382,7 +382,7 @@ Uses game theory math to fairly distribute the "credit" for the final prediction
 Coefficients that show the effect of each feature being included in the model.
 
 :::
-::: {.column width=40%}
+::: {.column}
 ```{r}
 #| label: fig-2dim-shap
 #| fig-align: "center"
@@ -443,7 +443,7 @@ anchor_plot
 :::
 ::::
 
-## Our contribution
+## What we made
 
 ::::{.columns}
 
@@ -466,11 +466,11 @@ Try the package out from [https://github.com/janithwanni/kultarr](https:://githu
 ```{=html}
 <div style="display:flex; flex-direction: row; justify-content: space-around; align-items:center; width: 100%;"> 
 <img src="https://facts.net/wp-content/uploads/2025/01/26-facts-about-kumquat-1737433280.jpg" style="width:50%"/>
-<img src="imgs/sticker.png" style="width:50%"/>
+<img src="imgs/sticker.png" style="width:35%"/>
 </div>
 ```
 
-Kumquats are a smaller lime-like fruit, and was developed to help people understand the inner workings of LIME and what happens within it by exposing a lot of the inner workings within R.
+Kumquats was developed to help people understand the inner workings of LIME and what happens within it by exposing a lot of the inner workings within R.
 
 You can install kumquats from CRAN by running 
 
